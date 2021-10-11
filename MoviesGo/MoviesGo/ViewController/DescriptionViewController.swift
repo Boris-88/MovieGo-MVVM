@@ -1,5 +1,5 @@
 // DescriptionViewController.swift
-// Copyright © Boris Zverik. All rights reserved.
+// Copyright © Boris. All rights reserved.
 
 import UIKit
 
@@ -19,7 +19,7 @@ final class DescriptionViewController: UIViewController {
     private var nameMoviesLabel = UILabel()
     private var descriptionMoviesText = UITextView()
     private var releaseDate = UILabel()
-    private var networkLayer = NetWorcLayer()
+    private var networkLayer = NetWorkLayer()
     private var detailsMovie: DetailsMovie? {
         didSet {
             descriptionTabelView.reloadData()

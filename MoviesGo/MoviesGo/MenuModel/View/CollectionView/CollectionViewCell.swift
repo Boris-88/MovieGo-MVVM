@@ -1,5 +1,5 @@
 // CollectionViewCell.swift
-// Copyright © Boris Zverik. All rights reserved.
+// Copyright © Boris. All rights reserved.
 
 import UIKit
 
@@ -11,7 +11,7 @@ final class CollectionViewCell: UICollectionViewCell {
     var onSelectedID: ((Int) -> Void)?
     var id: Int?
 
-    private var networkLayer = NetWorcLayer()
+    private var networkLayer = NetWorkLayer()
 
     // MARK: - Public properties
 

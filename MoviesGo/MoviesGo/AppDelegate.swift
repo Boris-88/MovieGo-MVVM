@@ -1,5 +1,5 @@
 // AppDelegate.swift
-// Copyright © Boris Zverik. All rights reserved.
+// Copyright © Boris. All rights reserved.
 
 import UIKit
 

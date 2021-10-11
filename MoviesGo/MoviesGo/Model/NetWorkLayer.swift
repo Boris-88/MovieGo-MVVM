@@ -1,9 +1,9 @@
-// NetWorcLayer.swift
-// Copyright © Boris Zverik. All rights reserved.
+// NetWorkLayer.swift
+// Copyright © Boris. All rights reserved.
 
 import Foundation
 
-final class NetWorcLayer {
+final class NetWorkLayer {
     func fetchData<T: Decodable>(
         _ type: T.Type,
         mainHost: String = AppSetting.dataHost,

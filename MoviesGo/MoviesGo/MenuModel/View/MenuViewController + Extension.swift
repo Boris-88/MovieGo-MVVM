@@ -1,5 +1,5 @@
 // MenuViewController + Extension.swift
-// Copyright © Boris Zverik. All rights reserved.
+// Copyright © Boris. All rights reserved.
 
 import UIKit
 
@@ -29,7 +29,6 @@ extension MenuViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layot)
         collectionView.delegate = self
         collectionView.dataSource = self
-
         collectionView.register(
             CollectionViewCell.self,
             forCellWithReuseIdentifier: CollectionViewCell.reuseID

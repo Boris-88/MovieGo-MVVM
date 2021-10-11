@@ -1,5 +1,5 @@
 // MenuViewController.swift
-// Copyright © Boris Zverik. All rights reserved.
+// Copyright © Boris. All rights reserved.
 
 import UIKit
 
@@ -7,25 +7,38 @@ final class MenuViewController: UIViewController {
     // MARK: - public properties
 
     lazy var avatarButton = makeAvatarButton()
+    lazy var avatarImageView = makeAvatarImageView()
+    lazy var collectionView = makeCollectionView()
 
     // MARK: - Private properties
 
-    private lazy var avatarImageView = makeAvatarImageView()
-    private lazy var collectionView = makeCollectionView()
     private var onSelectedID: ((Int) -> Void)?
-    private var menuViewModel: MenuViewModel!
-    private var menuView: MenuView!
+    private var menuViewModel: MenuViewModelProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        menuViewModel?.loadData()
         setupView()
+        reloadDataView()
     }
 
-    // MARK: - PRIVATE METHODE
+    // MARK: - public function
+
+    func setupMenuViewModel(menuViewModel: MenuViewModelProtocol) {
+        self.menuViewModel = menuViewModel
+    }
+
+    // MARK: - Private functions
 
     private func setupView() {
         createAvatarButton()
         createTitleNC()
+    }
+
+    private func reloadDataView() {
+        menuViewModel?.updateViewData = { [weak self] in
+            self?.collectionView.reloadData()
+        }
     }
 
     private func createAvatarButton() {
@@ -58,7 +71,7 @@ final class MenuViewController: UIViewController {
 
 extension MenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let id = pageDataMovie?.movies[indexPath.row].id else { return }
+        guard let id = menuViewModel?.pageDataMovie?.movies[indexPath.row].id else { return }
         onSelectedID = { [weak self] id in
             guard let self = self else { return }
             let descriptionVC = DescriptionViewController()
@@ -100,7 +113,7 @@ extension MenuViewController: UICollectionViewDelegate {
 
 extension MenuViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        pageDataMovie?.movies.count ?? 0
+        menuViewModel?.pageDataMovie?.movies.count ?? 0
     }
 
     func collectionView(
@@ -111,7 +124,7 @@ extension MenuViewController: UICollectionViewDataSource {
             withReuseIdentifier: CollectionViewCell.reuseID,
             for: indexPath
         ) as? CollectionViewCell else { return UICollectionViewCell() }
-        if let pageDataMovie = pageDataMovie {
+        if let pageDataMovie = menuViewModel?.pageDataMovie {
             let movie = pageDataMovie.movies[indexPath.row]
             cell.update(mainHost: AppSetting.imageHost, posterPath: movie.posterPath)
             cell.configurCell(movie: movie)

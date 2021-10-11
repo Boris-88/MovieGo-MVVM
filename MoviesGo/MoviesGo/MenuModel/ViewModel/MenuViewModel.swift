@@ -1,22 +1,29 @@
 // MenuViewModel.swift
-// Copyright © Boris Zverik. All rights reserved.
+// Copyright © Boris. All rights reserved.
 
 import Foundation
 
 protocol MenuViewModelProtocol: AnyObject {
-    var updateViewData: ((ViewState<PageDataMovie>) -> ())? { get set }
+    var updateViewData: VoidHendler? { get set }
+    var pageDataMovie: PageDataMovie? { get set }
+    func loadData()
 }
 
 final class MenuViewModel: MenuViewModelProtocol {
-    public var updateViewData: ((ViewState<PageDataMovie>) -> ())?
-    var networkLayer: NetWorcLayer?
+    // MARK: - Internal properties
 
-    init() {
-        updateViewData?(.initial)
-    }
-    
-    private func loadData() {
+    var updateViewData: VoidHendler?
+    var pageDataMovie: PageDataMovie?
+
+    // MARK: - Private properties
+
+    private var networkLayer: NetWorkLayer?
+
+    // MARK: - Internal function
+
+    func loadData() {
         networkLayer?.fetchData(PageDataMovie.self, methodStr: "movie/popular") { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case let .failure(error):
                 switch error {
@@ -28,7 +35,8 @@ final class MenuViewModel: MenuViewModelProtocol {
                     print("Отсуствуют данные")
                 }
             case let .success(data):
-                self?.pageDataMovie = data
+                self.pageDataMovie = data
+                self.updateViewData?()
             }
         }
     }

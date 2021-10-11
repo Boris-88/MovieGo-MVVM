@@ -1,5 +1,5 @@
-// ViewData.swift
-// Copyright © Boris Zverik. All rights reserved.
+// ViewState.swift
+// Copyright © Boris. All rights reserved.
 
 import Foundation
 
