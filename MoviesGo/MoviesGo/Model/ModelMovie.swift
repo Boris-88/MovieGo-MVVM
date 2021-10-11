@@ -1,9 +1,9 @@
-// Model.swift
+// ModelMovie.swift
 // Copyright © Boris Zverik. All rights reserved.
 
 import Foundation
 
-/// Модель
+/// Model PageDataMovie
 struct PageDataMovie {
     let page: Int
     let movies: [Movie]
@@ -29,7 +29,7 @@ extension PageDataMovie: Decodable {
     }
 }
 
-/// Модель
+/// Model Movie
 struct Movie {
     let posterPath: String?
     let id: Int
@@ -54,37 +54,6 @@ extension Movie: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: MovieCodingKeys.self)
         id = try container.decode(Int.self, forKey: .movieID)
-        posterPath = try container.decode(String?.self, forKey: .posterKeyPath)
-        title = try container.decode(String.self, forKey: .titleMovie)
-        overview = try container.decode(String.self, forKey: .overViewMovie)
-        releaseDate = try container.decode(String.self, forKey: .releaseDate)
-        popularity = try container.decode(Double.self, forKey: .popularyMovie)
-        voteAverage = try container.decode(Double.self, forKey: .voteAverageMovie)
-    }
-}
-
-/// Модель
-struct DetailsMovie {
-    let posterPath: String?
-    let overview: String
-    let title: String
-    let releaseDate: String
-    let popularity: Double
-    let voteAverage: Double
-}
-
-extension DetailsMovie: Decodable {
-    private enum MovieCodingKeys: String, CodingKey {
-        case posterKeyPath = "poster_path"
-        case overViewMovie = "overview"
-        case titleMovie = "title"
-        case releaseDate = "release_date"
-        case popularyMovie = "popularity"
-        case voteAverageMovie = "vote_average"
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: MovieCodingKeys.self)
         posterPath = try container.decode(String?.self, forKey: .posterKeyPath)
         title = try container.decode(String.self, forKey: .titleMovie)
         overview = try container.decode(String.self, forKey: .overViewMovie)
