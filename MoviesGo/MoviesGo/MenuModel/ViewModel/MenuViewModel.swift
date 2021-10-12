@@ -5,17 +5,19 @@ import Foundation
 
 protocol MenuViewModelProtocol: AnyObject {
     var pageDataMovie: PageDataMovie? { get set }
-    var updateView: VoidHendler? { get set }
-//    var networkLayer: NetWorkLayer? { get set }
+    var updateData: VoidHendler? { get set }
     func loadData()
 }
 
 final class MenuViewModel: MenuViewModelProtocol {
     // MARK: - Internal properties
 
-    var networkLayer = NetWorkLayer()
     var pageDataMovie: PageDataMovie?
-    var updateView: VoidHendler?
+    var updateData: VoidHendler?
+
+    // MARK: - Private propertie
+
+    private var networkLayer = NetWorkLayer()
 
     // MARK: - Internal function
 
@@ -34,7 +36,7 @@ final class MenuViewModel: MenuViewModelProtocol {
                 }
             case let .success(data):
                 self.pageDataMovie = data
-                self.updateView?()
+                self.updateData?()
             }
         }
     }

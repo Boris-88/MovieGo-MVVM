@@ -35,7 +35,7 @@ final class MenuViewController: UIViewController {
 
     private func reloadDataView() {
         viewModel.loadData()
-        viewModel.updateView = { [weak self] in
+        viewModel.updateData = { [weak self] in
             guard let self = self else { return }
             self.collectionView.reloadData()
         }
