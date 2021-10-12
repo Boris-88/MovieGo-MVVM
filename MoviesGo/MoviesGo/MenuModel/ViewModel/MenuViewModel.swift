@@ -4,24 +4,20 @@
 import Foundation
 
 protocol MenuViewModelProtocol: AnyObject {
-    var updateViewData: VoidHendler? { get set }
     var pageDataMovie: PageDataMovie? { get set }
-    func loadData()
+    func loadData(_ completion: @escaping () -> (Void))
+    var networkLayer: NetWorkLayer? { get set }
 }
 
 final class MenuViewModel: MenuViewModelProtocol {
     // MARK: - Internal properties
 
-    var updateViewData: VoidHendler?
+    var networkLayer: NetWorkLayer?
     var pageDataMovie: PageDataMovie?
-
-    // MARK: - Private properties
-
-    private var networkLayer: NetWorkLayer?
 
     // MARK: - Internal function
 
-    func loadData() {
+    func loadData(_ completion: @escaping () -> (Void)) {
         networkLayer?.fetchData(PageDataMovie.self, methodStr: "movie/popular") { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -36,7 +32,6 @@ final class MenuViewModel: MenuViewModelProtocol {
                 }
             case let .success(data):
                 self.pageDataMovie = data
-                self.updateViewData?()
             }
         }
     }

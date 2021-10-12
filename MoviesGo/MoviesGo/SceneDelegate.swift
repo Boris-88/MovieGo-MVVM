@@ -15,10 +15,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-
         let menuViewModel = MenuViewModel()
         let vc = MenuViewController()
-        vc.setupMenuViewModel(menuViewModel: menuViewModel)
+        vc.injectionViewModel(viewModel: menuViewModel)
         let navBar = UINavigationController(rootViewController: vc)
         window?.rootViewController = navBar
         window?.makeKeyAndVisible()
