@@ -17,6 +17,7 @@ final class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupView()
         reloadDataView()
     }
@@ -33,7 +34,8 @@ final class MenuViewController: UIViewController {
     }
 
     private func reloadDataView() {
-        viewModel?.loadData { [weak self] in
+        viewModel.loadData()
+        viewModel.updateView = { [weak self] in
             guard let self = self else { return }
             self.collectionView.reloadData()
         }
@@ -69,7 +71,7 @@ final class MenuViewController: UIViewController {
 
 extension MenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let id = viewModel?.pageDataMovie?.movies[indexPath.row].id else { return }
+        guard let id = viewModel.pageDataMovie?.movies[indexPath.row].id else { return }
         onSelectedID = { [weak self] id in
             guard let self = self else { return }
             let descriptionVC = DescriptionViewController()
@@ -111,7 +113,7 @@ extension MenuViewController: UICollectionViewDelegate {
 
 extension MenuViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel?.pageDataMovie?.movies.count ?? 0
+        viewModel.pageDataMovie?.movies.count ?? 0
     }
 
     func collectionView(
@@ -123,7 +125,7 @@ extension MenuViewController: UICollectionViewDataSource {
             for: indexPath
         ) as?
             CollectionViewCell else { return UICollectionViewCell() }
-        if let item = viewModel?.pageDataMovie {
+        if let item = viewModel.pageDataMovie {
             let movie = item.movies[indexPath.row]
             cell.update(mainHost: AppSetting.imageHost, posterPath: movie.posterPath)
             cell.configurCell(movie: movie)
