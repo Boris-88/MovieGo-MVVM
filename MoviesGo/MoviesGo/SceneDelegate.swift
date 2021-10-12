@@ -1,5 +1,5 @@
 // SceneDelegate.swift
-// Copyright © Boris Zverik. All rights reserved.
+// Copyright © Boris. All rights reserved.
 
 import UIKit
 
@@ -15,7 +15,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let navBar = UINavigationController(rootViewController: MenuViewController())
+        let menuViewModel = MenuViewModel()
+        let vc = MenuViewController()
+        vc.injectionViewModel(viewModel: menuViewModel)
+        let navBar = UINavigationController(rootViewController: vc)
         window?.rootViewController = navBar
         window?.makeKeyAndVisible()
     }
