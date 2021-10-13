@@ -6,15 +6,10 @@ import UIKit
 final class PosterPatchTableViewCell: UITableViewCell {
     static var reuseID = "PosterPatchTableViewCell"
 
-    // MARK: - Stored Properties
-
-    var posterPath: String? {
-        didSet { update(posterPath: posterPath) }
-    }
-
     // MARK: - PRIVATE PROPERTY
 
-    private let posterImage: UIImageView = {
+    private let serviceImage = ImageAPIService()
+    private var posterImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
         imageView.layer.cornerRadius = 25
@@ -43,26 +38,21 @@ final class PosterPatchTableViewCell: UITableViewCell {
         ])
     }
 
+    func configCell(posterPath: String) {
+        serviceImage.updateImage(posterPath: posterPath) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(image):
+                self.posterImage.image = image
+            case let .failure(error):
+                self.posterImage.image = UIImage(named: "error")
+                print(error.localizedDescription)
+            }
+        }
+    }
+
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: - PRIVATE METHODE
-
-    private func update(posterPath: String?) {
-        if let posterPath = posterPath, let url = URL(string: posterPath) {
-            URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-                if error != nil {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.posterImage.image = UIImage(named: "error")
-                    }
-                } else if let data = data {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.posterImage.image = UIImage(data: data)
-                    }
-                }
-            }.resume()
-        }
     }
 }

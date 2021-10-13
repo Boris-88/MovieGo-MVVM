@@ -1,4 +1,4 @@
-// ModelDetails.swift
+// DetailsModel.swift
 // Copyright © Boris. All rights reserved.
 
 import Foundation

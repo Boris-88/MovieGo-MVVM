@@ -1,37 +1,47 @@
-// MenuViewModel.swift
+// DetailsViewModel.swift
 // Copyright © Boris. All rights reserved.
 
 import Foundation
 
-protocol MenuViewModelProtocol: AnyObject {
-    var pageDataMovie: PageDataMovie? { get set }
+protocol DetailsViewModelProtocol {
+    var details: DetailsMovie? { get set }
     var updateData: VoidHendler? { get set }
     var showError: ((String, Bool, @escaping VoidHendler) -> ())? { get set }
     func loadData()
 }
 
-final class MenuViewModel: MenuViewModelProtocol {
+final class DetailsViewModel: DetailsViewModelProtocol {
     // MARK: - Internal properties
 
-    var pageDataMovie: PageDataMovie?
-    var updateData: VoidHendler?
     var showError: ((String, Bool, @escaping VoidHendler) -> ())?
+    var details: DetailsMovie?
+    var updateData: VoidHendler?
+    var movieID: Int
 
     // MARK: - Private propertie
 
-    private var stateView: ViewState<PageDataMovie> = .loading {
+    private var movieAPIService: MovieAPIServiceProtocol!
+
+    init(movieAPIService: MovieAPIServiceProtocol, movieID: Int) {
+        self.movieAPIService = movieAPIService
+        self.movieID = movieID
+    }
+
+    private var stateView: ViewState<DetailsMovie> = .loading {
         didSet {
             switch stateView {
             case let .data(model):
-                pageDataMovie = model
+                details = model
                 updateData?()
             case .loading:
                 break
             case let .error(errorType):
-                pageDataMovie = nil
+                details = nil
                 updateData?()
+
                 let errorDescription: String
                 let isReload: Bool
+
                 switch errorType {
                 case let .failure(text):
                     errorDescription = text.localizedDescription
@@ -50,29 +60,24 @@ final class MenuViewModel: MenuViewModelProtocol {
         }
     }
 
-    private var movieAPIService: MovieAPIServiceProtocol!
-
-    init(movieAPIService: MovieAPIServiceProtocol) {
-        self.movieAPIService = movieAPIService
-        loadData()
-    }
-
     // MARK: - Internal function
 
     func loadData() {
-        movieAPIService.fetchDataMovie { [weak self] result in
+        movieAPIService.fetchDataDetails(movieID: movieID) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .failure(error):
-                print(error)
+                switch error {
+                case let .failure(error):
+                    self.stateView = .error(.failure(error))
+                case .failureDecode:
+                    self.stateView = .error(.failureDecode)
+                case .notData:
+                    self.stateView = .error(.notData)
+                }
             case let .success(data):
-                self.pageDataMovie = data
-                self.updateData?()
-                self.stateView = Bool.random() ? .error(.failure(DataError())) : .data(data)
+                self.stateView = .data(data)
             }
         }
     }
 }
-
-/// asdgf
-struct DataError: Error {}

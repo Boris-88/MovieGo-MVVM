@@ -11,7 +11,7 @@ final class CollectionViewCell: UICollectionViewCell {
     var onSelectedID: ((Int) -> Void)?
     var id: Int?
 
-    private var networkLayer = NetWorkLayer()
+    private var serviceImage = ImageAPIService()
 
     // MARK: - Public properties
 
@@ -51,19 +51,16 @@ final class CollectionViewCell: UICollectionViewCell {
         releaseLabel.text = convertDataFormatter(movie.releaseDate)
     }
 
-    public func update(mainHost: String, posterPath: String?) {
-        if let posterPath = posterPath, let url = URL(string: mainHost + posterPath) {
-            URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-                if error != nil {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.posterImage.image = UIImage(named: "error")
-                    }
-                } else if let data = data {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.posterImage.image = UIImage(data: data)
-                    }
-                }
-            }.resume()
+    func configCellImage(posterPath: String?) {
+        serviceImage.updateImage(posterPath: posterPath) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(image):
+                self.posterImage.image = image
+            case let .failure(error):
+                self.posterImage.image = UIImage(named: "error")
+                print(error.localizedDescription)
+            }
         }
     }
 

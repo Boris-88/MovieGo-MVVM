@@ -9,10 +9,13 @@ final class MenuViewController: UIViewController {
     lazy var avatarButton = makeAvatarButton()
     lazy var avatarImageView = makeAvatarImageView()
     lazy var collectionView = makeCollectionView()
+    lazy var activitiIndicator = makeActivityIndicator()
 
     // MARK: - Private properties
 
-    private var onSelectedID: ((Int) -> Void)?
+    private let titleActionAlert = "Обновить"
+    private let titleActionAlertCancle = "Отмена"
+    private let titleAlertERROR = "Ошибка!"
     private var viewModel: MenuViewModelProtocol!
 
     override func viewDidLoad() {
@@ -21,7 +24,8 @@ final class MenuViewController: UIViewController {
         setupView()
         reloadDataView()
     }
-
+    // MARK: - Public functions
+    
     func injectionViewModel(viewModel: MenuViewModelProtocol) {
         self.viewModel = viewModel
     }
@@ -34,10 +38,21 @@ final class MenuViewController: UIViewController {
     }
 
     private func reloadDataView() {
-        viewModel.loadData()
         viewModel.updateData = { [weak self] in
             guard let self = self else { return }
             self.collectionView.reloadData()
+        }
+        // Сообщение об ошибки
+        viewModel.showError = { [weak self] errorText, isReload, completion in
+            guard let self = self else { return }
+            self.alertShowComplition(
+                title: self.titleAlertERROR ,
+                message: errorText,
+                isAction: isReload,
+                buttonAction: self.titleActionAlert,
+                selectButtonAction: self.titleActionAlertCancle,
+                comlitionHandler: completion
+            )
         }
     }
 
@@ -46,8 +61,8 @@ final class MenuViewController: UIViewController {
         barButton.customView = avatarButton
         navigationItem.rightBarButtonItem = barButton
         avatarButton.addTarget(self, action: #selector(tapShowAvatarButton), for: .touchUpInside)
-        guard let data = UserDefaults.standard.value(forKey: "avatar") as? Data else { fatalError() }
-        let image = UIImage(data: data)?.resizeImage(to: CGSize(width: 35, height: 35))
+        guard let data = UserDefaults.standard.value(forKey: "avatar") as? Data else { return }
+        let image = UIImage(data: data)?.resizeImage(to: CGSize(width: 40, height: 40))
         avatarButton.setImage(image, for: .normal)
     }
 
@@ -71,14 +86,12 @@ final class MenuViewController: UIViewController {
 
 extension MenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let id = viewModel.pageDataMovie?.movies[indexPath.row].id else { return }
-        onSelectedID = { [weak self] id in
-            guard let self = self else { return }
-            let descriptionVC = DescriptionViewController()
-            descriptionVC.id = id
-            self.navigationController?.pushViewController(descriptionVC, animated: true)
-        }
-        onSelectedID?(id)
+        guard let movieUD = viewModel.pageDataMovie?.movies[indexPath.row].id else { return }
+        let vc = DescriptionViewController()
+        let movieAPIService = MovieAPIService()
+        let detailsViewModel = DetailsViewModel(movieAPIService: movieAPIService, movieID: movieUD)
+        vc.injectionViewModel(viewModel: detailsViewModel)
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     func collectionView(
@@ -127,7 +140,7 @@ extension MenuViewController: UICollectionViewDataSource {
             CollectionViewCell else { return UICollectionViewCell() }
         if let item = viewModel.pageDataMovie {
             let movie = item.movies[indexPath.row]
-            cell.update(mainHost: AppSetting.imageHost, posterPath: movie.posterPath)
+            cell.configCellImage(posterPath: movie.posterPath)
             cell.configurCell(movie: movie)
             return cell
         }
