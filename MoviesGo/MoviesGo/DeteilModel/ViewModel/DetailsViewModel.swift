@@ -16,13 +16,13 @@ final class DetailsViewModel: DetailsViewModelProtocol {
     var showError: ((String, Bool, @escaping VoidHendler) -> ())?
     var details: DetailsMovie?
     var updateData: VoidHendler?
-    var movieID: Int?
+    var movieID: Int
 
     // MARK: - Private propertie
 
-    private var networkLayer: NetworkAPIServiceProtocol!
+    private var networkLayer: MovieAPIServiceProtocol!
 
-    init(networkLayer: NetworkAPIServiceProtocol, movieID: Int?) {
+    init(networkLayer: MovieAPIServiceProtocol, movieID: Int) {
         self.networkLayer = networkLayer
         self.movieID = movieID
     }

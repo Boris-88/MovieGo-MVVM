@@ -83,7 +83,7 @@ extension MenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movieUD = viewModel.pageDataMovie?.movies[indexPath.row].id else { return }
         let vc = DescriptionViewController()
-        let networkLayer = NetworkAPIService()
+        let networkLayer = MovieAPIService()
         let detailsViewModel = DetailsViewModel(networkLayer: networkLayer, movieID: movieUD)
         vc.injectionViewModel(viewModel: detailsViewModel)
         navigationController?.pushViewController(vc, animated: true)

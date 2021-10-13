@@ -1,17 +1,17 @@
-// NetworkAPIService.swift
+// MovieAPIService.swift
 // Copyright © Boris. All rights reserved.
 
 import Foundation
 
-protocol NetworkAPIServiceProtocol {
+protocol MovieAPIServiceProtocol {
     func fetchDataMovie(completion: @escaping (Swift.Result<PageDataMovie, ResponsSessionError>) -> Void)
     func fetchDataDetails(
-        movieID: Int?,
+        movieID: Int,
         completion: @escaping (Swift.Result<DetailsMovie, ResponsSessionError>) -> Void
     )
 }
 
-final class NetworkAPIService: NetworkAPIServiceProtocol {
+final class MovieAPIService: MovieAPIServiceProtocol {
     func fetchDataMovie(completion: @escaping (Swift.Result<PageDataMovie, ResponsSessionError>) -> Void) {
         let urlString = HTTPSettigs.baseURL + "\(HTTPMethod.popular)" + "?" + "api_key=\(HTTPSettigs.apiKey)" + "&" +
             "language=\(HTTPSettigs.language)"
@@ -36,7 +36,7 @@ final class NetworkAPIService: NetworkAPIServiceProtocol {
     }
 
     func fetchDataDetails(
-        movieID: Int?,
+        movieID: Int,
         completion: @escaping (Swift.Result<DetailsMovie, ResponsSessionError>) -> Void
     ) {
         let urlString = HTTPSettigs.baseURL + "\("movie/\(movieID)")" + "?" +
@@ -44,12 +44,14 @@ final class NetworkAPIService: NetworkAPIServiceProtocol {
             "language=\(HTTPSettigs.language)"
 
         guard let url = URL(string: urlString) else { return }
+        print(url)
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else { return }
             do {
                 let resData = try JSONDecoder().decode(DetailsMovie.self, from: data)
                 DispatchQueue.main.async {
                     completion(.success(resData))
+                    print(resData)
                 }
             } catch let error as ResponsSessionError {
                 completion(.failure(error))

@@ -8,7 +8,7 @@ final class PosterPatchTableViewCell: UITableViewCell {
 
     // MARK: - PRIVATE PROPERTY
 
-    private let serviceImage = ServiceImageManager()
+    private let serviceImage = ImageAPIService()
     private var posterImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill

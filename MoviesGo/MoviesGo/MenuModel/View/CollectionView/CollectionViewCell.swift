@@ -11,7 +11,7 @@ final class CollectionViewCell: UICollectionViewCell {
     var onSelectedID: ((Int) -> Void)?
     var id: Int?
 
-    private var serviceImage = ServiceImageManager()
+    private var serviceImage = ImageAPIService()
 
     // MARK: - Public properties
 

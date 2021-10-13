@@ -53,9 +53,9 @@ final class MenuViewModel: MenuViewModelProtocol {
         }
     }
 
-    private var networkLayer: NetworkAPIServiceProtocol!
+    private var networkLayer: MovieAPIServiceProtocol!
 
-    init(networkLayer: NetworkAPIServiceProtocol) {
+    init(networkLayer: MovieAPIServiceProtocol) {
         self.networkLayer = networkLayer
         loadData()
     }
@@ -76,8 +76,11 @@ final class MenuViewModel: MenuViewModelProtocol {
                     self.stateView = .error(.notData)
                 }
             case let .success(data):
-                self.stateView = .data(data)
+                self.stateView = Bool.random() ? .error(.failure(DataError())) : .data(data)
             }
         }
     }
 }
+
+/// asdgf
+struct DataError: Error {}
