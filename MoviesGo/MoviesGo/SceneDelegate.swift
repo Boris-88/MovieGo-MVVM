@@ -15,8 +15,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let networkLayer = MovieAPIService()
-        let menuViewModel = MenuViewModel(networkLayer: networkLayer)
+        let movieAPIService = MovieAPIService()
+        let menuViewModel = MenuViewModel(movieAPIService: movieAPIService)
         let vc = MenuViewController()
         vc.injectionViewModel(viewModel: menuViewModel)
         let navBar = UINavigationController(rootViewController: vc)

@@ -9,10 +9,13 @@ final class MenuViewController: UIViewController {
     lazy var avatarButton = makeAvatarButton()
     lazy var avatarImageView = makeAvatarImageView()
     lazy var collectionView = makeCollectionView()
-    var onSelectedID: ((Int) -> Void)?
+    lazy var activitiIndicator = makeActivityIndicator()
 
     // MARK: - Private properties
 
+    private let titleActionAlert = "Обновить"
+    private let titleActionAlertCancle = "Отмена"
+    private let titleAlertERROR = "Ошибка!"
     private var viewModel: MenuViewModelProtocol!
 
     override func viewDidLoad() {
@@ -21,7 +24,8 @@ final class MenuViewController: UIViewController {
         setupView()
         reloadDataView()
     }
-
+    // MARK: - Public functions
+    
     func injectionViewModel(viewModel: MenuViewModelProtocol) {
         self.viewModel = viewModel
     }
@@ -38,16 +42,17 @@ final class MenuViewController: UIViewController {
             guard let self = self else { return }
             self.collectionView.reloadData()
         }
-
+        // Сообщение об ошибки
         viewModel.showError = { [weak self] errorText, isReload, completion in
-            let alert = UIAlertController(title: errorText, message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .destructive))
-            if isReload {
-                alert.addAction(UIAlertAction(title: "Reload", style: .default) { _ in
-                    completion()
-                })
-            }
-            self?.present(alert, animated: true)
+            guard let self = self else { return }
+            self.alertShowComplition(
+                title: self.titleAlertERROR ,
+                message: errorText,
+                isAction: isReload,
+                buttonAction: self.titleActionAlert,
+                selectButtonAction: self.titleActionAlertCancle,
+                comlitionHandler: completion
+            )
         }
     }
 
@@ -83,11 +88,10 @@ extension MenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movieUD = viewModel.pageDataMovie?.movies[indexPath.row].id else { return }
         let vc = DescriptionViewController()
-        let networkLayer = MovieAPIService()
-        let detailsViewModel = DetailsViewModel(networkLayer: networkLayer, movieID: movieUD)
+        let movieAPIService = MovieAPIService()
+        let detailsViewModel = DetailsViewModel(movieAPIService: movieAPIService, movieID: movieUD)
         vc.injectionViewModel(viewModel: detailsViewModel)
         navigationController?.pushViewController(vc, animated: true)
-        onSelectedID?(movieUD)
     }
 
     func collectionView(

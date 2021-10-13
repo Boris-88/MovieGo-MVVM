@@ -15,6 +15,9 @@ final class DescriptionViewController: UIViewController {
 
     private let tabelView = UITableView()
     private let typeCells: [TypeCell] = [.poster, .title, .releaseDate, .overview]
+    private let titleActionAlert = "Обновить"
+    private let titleActionAlertCancle = "Отмена"
+    private let titleAlertERROR = "Ошибка!"
     private var viewModel: DetailsViewModelProtocol!
 
     override func viewDidLoad() {
@@ -23,7 +26,8 @@ final class DescriptionViewController: UIViewController {
         createTabelView()
         reloadDataView()
     }
-
+    // MARK: - Public functions
+    
     func injectionViewModel(viewModel: DetailsViewModelProtocol) {
         self.viewModel = viewModel
     }
@@ -38,16 +42,17 @@ final class DescriptionViewController: UIViewController {
                 self.tabelView.reloadData()
             }
         }
-
+        // Сообщение об ошибки
         viewModel.showError = { [weak self] errorText, isReload, completion in
-            let alert = UIAlertController(title: errorText, message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .destructive))
-            if isReload {
-                alert.addAction(UIAlertAction(title: "Reload", style: .default) { _ in
-                    completion()
-                })
-            }
-            self?.present(alert, animated: true)
+            guard let self = self else { return }
+            self.alertShowComplition(
+                title: self.titleAlertERROR,
+                message: errorText,
+                isAction: isReload,
+                buttonAction: self.titleActionAlert,
+                selectButtonAction: self.titleActionAlertCancle,
+                comlitionHandler: completion
+            )
         }
     }
 

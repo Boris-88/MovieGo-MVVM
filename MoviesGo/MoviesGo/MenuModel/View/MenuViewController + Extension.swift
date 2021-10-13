@@ -37,6 +37,16 @@ extension MenuViewController {
         view.addSubview(collectionView)
         return collectionView
     }
+
+    func makeActivityIndicator() -> UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.color = .darkGray
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
+        return activityIndicator
+    }
 }
 
 // MARK: - UIImagePickerControllerDelegate

@@ -20,24 +20,19 @@ final class DetailsViewModel: DetailsViewModelProtocol {
 
     // MARK: - Private propertie
 
-    private var networkLayer: MovieAPIServiceProtocol!
+    private var movieAPIService: MovieAPIServiceProtocol!
 
-    init(networkLayer: MovieAPIServiceProtocol, movieID: Int) {
-        self.networkLayer = networkLayer
+    init(movieAPIService: MovieAPIServiceProtocol, movieID: Int) {
+        self.movieAPIService = movieAPIService
         self.movieID = movieID
     }
 
-    private var stateView: ViewState<DetailsMovie> = .initial {
+    private var stateView: ViewState<DetailsMovie> = .loading {
         didSet {
             switch stateView {
             case let .data(model):
                 details = model
                 updateData?()
-
-            case .initial:
-                details = nil
-                updateData?()
-
             case .loading:
                 break
             case let .error(errorType):
@@ -68,7 +63,7 @@ final class DetailsViewModel: DetailsViewModelProtocol {
     // MARK: - Internal function
 
     func loadData() {
-        networkLayer.fetchDataDetails(movieID: movieID) { [weak self] result in
+        movieAPIService.fetchDataDetails(movieID: movieID) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .failure(error):

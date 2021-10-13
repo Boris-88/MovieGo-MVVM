@@ -19,14 +19,11 @@ final class MenuViewModel: MenuViewModelProtocol {
 
     // MARK: - Private propertie
 
-    private var stateView: ViewState<PageDataMovie> = .initial {
+    private var stateView: ViewState<PageDataMovie> = .loading {
         didSet {
             switch stateView {
             case let .data(model):
                 pageDataMovie = model
-                updateData?()
-            case .initial:
-                pageDataMovie = nil
                 updateData?()
             case .loading:
                 break
@@ -53,29 +50,24 @@ final class MenuViewModel: MenuViewModelProtocol {
         }
     }
 
-    private var networkLayer: MovieAPIServiceProtocol!
+    private var movieAPIService: MovieAPIServiceProtocol!
 
-    init(networkLayer: MovieAPIServiceProtocol) {
-        self.networkLayer = networkLayer
+    init(movieAPIService: MovieAPIServiceProtocol) {
+        self.movieAPIService = movieAPIService
         loadData()
     }
 
     // MARK: - Internal function
 
     func loadData() {
-        networkLayer.fetchDataMovie { [weak self] result in
+        movieAPIService.fetchDataMovie { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .failure(error):
-                switch error {
-                case let .failure(error):
-                    self.stateView = .error(.failure(error))
-                case .failureDecode:
-                    self.stateView = .error(.failureDecode)
-                case .notData:
-                    self.stateView = .error(.notData)
-                }
+                print(error)
             case let .success(data):
+                self.pageDataMovie = data
+                self.updateData?()
                 self.stateView = Bool.random() ? .error(.failure(DataError())) : .data(data)
             }
         }

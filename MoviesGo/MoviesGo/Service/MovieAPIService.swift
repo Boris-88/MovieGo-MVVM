@@ -44,7 +44,6 @@ final class MovieAPIService: MovieAPIServiceProtocol {
             "language=\(HTTPSettigs.language)"
 
         guard let url = URL(string: urlString) else { return }
-        print(url)
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else { return }
             do {

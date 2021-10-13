@@ -5,8 +5,6 @@ import Foundation
 
 /// ViewData
 enum ViewState<Model> {
-    // Инициализация
-    case initial
     // Загрузка
     case loading
     // Есть данные
