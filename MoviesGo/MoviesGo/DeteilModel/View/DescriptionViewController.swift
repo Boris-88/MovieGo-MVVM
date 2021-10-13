@@ -11,72 +11,68 @@ final class DescriptionViewController: UIViewController {
         case releaseDate
     }
 
-    // MARK: - PRIVATE PROPERTY
+    // MARK: - Private properties
 
-    private let descriptionTabelView = UITableView()
+    private let tabelView = UITableView()
     private let typeCells: [TypeCell] = [.poster, .title, .releaseDate, .overview]
-    private var moviesImage = UIImageView()
-    private var nameMoviesLabel = UILabel()
-    private var descriptionMoviesText = UITextView()
-    private var releaseDate = UILabel()
-    private var networkLayer = NetWorkLayer()
-    private var detailsMovie: DetailsMovie? {
-        didSet {
-            descriptionTabelView.reloadData()
-        }
-    }
-
-    var id: Int?
-    var onSelectedID: ((Int) -> Void)?
+    private var viewModel: DetailsViewModelProtocol!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.overrideUserInterfaceStyle = .dark
-        tabBarController?.tabBar.barTintColor = .white
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = detailsMovie?.title
-        createDescriptionTabelView()
-        loadData()
+        createTitleNC()
+        createTabelView()
+        reloadDataView()
     }
 
-    private func loadData() {
-        if let id = id {
-            networkLayer.fetchData(DetailsMovie.self, methodStr: "movie/\(id)") { [weak self] result in
-                switch result {
-                case let .failure(error):
-                    switch error {
-                    case let .failure(error):
-                        print("Ошибка связи с Бэк Error: \(error.localizedDescription)")
-                    case .failureDecode:
-                        print("Ошибка декодирования")
-                    case .notData:
-                        print("Отсуствуют данные")
-                    }
-                case let .success(data):
-                    self?.detailsMovie = data
-                }
+    func injectionViewModel(viewModel: DetailsViewModelProtocol) {
+        self.viewModel = viewModel
+    }
+
+    // MARK: - Private functions
+
+    private func reloadDataView() {
+        viewModel.loadData()
+        viewModel.updateData = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.tabelView.reloadData()
             }
+        }
+
+        viewModel.showError = { [weak self] errorText, isReload, completion in
+            let alert = UIAlertController(title: errorText, message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .destructive))
+            if isReload {
+                alert.addAction(UIAlertAction(title: "Reload", style: .default) { _ in
+                    completion()
+                })
+            }
+            self?.present(alert, animated: true)
         }
     }
 
-    // MARK: - PRIVATE METHODE
+    private func createTitleNC() {
+        navigationController?.overrideUserInterfaceStyle = .dark
+        tabBarController?.tabBar.barTintColor = .white
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
 
-    private func createDescriptionTabelView() {
-        descriptionTabelView.frame = view.bounds
-        descriptionTabelView.backgroundColor = .black
-        descriptionTabelView.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.reuseID)
-        descriptionTabelView.register(
+    private func createTabelView() {
+        tabelView.frame = view.bounds
+        tabelView.backgroundColor = .black
+        tabelView.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.reuseID)
+        tabelView.register(
             PosterPatchTableViewCell.self,
             forCellReuseIdentifier: PosterPatchTableViewCell.reuseID
         )
-        descriptionTabelView.register(
+        tabelView.register(
             ReleaseTableViewCell.self,
             forCellReuseIdentifier: ReleaseTableViewCell.reuseID
         )
-        descriptionTabelView.register(OverviewTableViewCell.self, forCellReuseIdentifier: OverviewTableViewCell.reuseID)
-        view.addSubview(descriptionTabelView)
-        descriptionTabelView.delegate = self
-        descriptionTabelView.dataSource = self
+        tabelView.register(OverviewTableViewCell.self, forCellReuseIdentifier: OverviewTableViewCell.reuseID)
+        view.addSubview(tabelView)
+        tabelView.delegate = self
+        tabelView.dataSource = self
     }
 }
 
@@ -110,8 +106,8 @@ extension DescriptionViewController: UITableViewDataSource {
                 for: indexPath
             ) as? PosterPatchTableViewCell else { return UITableViewCell() }
 
-            if let posterPath = detailsMovie?.posterPath {
-                cell.posterPath = AppSetting.imageHost + posterPath
+            if let posterPath = viewModel.details?.posterPath {
+                cell.configCell(posterPath: posterPath)
             }
             return cell
 
@@ -120,7 +116,7 @@ extension DescriptionViewController: UITableViewDataSource {
                 withIdentifier: TitleTableViewCell.reuseID,
                 for: indexPath
             ) as? TitleTableViewCell else { return UITableViewCell() }
-            cell.title = detailsMovie?.title
+            cell.title = viewModel.details?.title
             return cell
 
         case .releaseDate:
@@ -128,8 +124,8 @@ extension DescriptionViewController: UITableViewDataSource {
                 withIdentifier: ReleaseTableViewCell.reuseID,
                 for: indexPath
             ) as? ReleaseTableViewCell else { return UITableViewCell() }
-            cell.releaseDate = detailsMovie?.releaseDate
-            cell.popularyMovie = detailsMovie?.voteAverage
+            cell.releaseDate = viewModel.details?.releaseDate
+            cell.popularyMovie = viewModel.details?.voteAverage
             return cell
 
         case .overview:
@@ -137,7 +133,7 @@ extension DescriptionViewController: UITableViewDataSource {
                 withIdentifier: OverviewTableViewCell.reuseID,
                 for: indexPath
             ) as? OverviewTableViewCell else { return UITableViewCell() }
-            cell.overview = detailsMovie?.overview
+            cell.overview = viewModel.details?.overview
             return cell
         }
     }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ResponsSessionError
+// Описание ошибок
 enum ResponsSessionError: Error {
     case failure(Error)
     case notData

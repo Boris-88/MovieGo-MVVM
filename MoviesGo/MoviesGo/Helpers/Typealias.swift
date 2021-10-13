@@ -1,4 +1,4 @@
-// VoidHendler.swift
+// Typealias.swift
 // Copyright © Boris. All rights reserved.
 
 import Foundation

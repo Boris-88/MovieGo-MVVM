@@ -12,5 +12,5 @@ enum ViewState<Model> {
     // Есть данные
     case data(_ model: Model)
     // Ошибка
-    case error(_ error: Error, _ handler: ResponsSessionError)
+    case error(_ error: ResponsSessionError)
 }

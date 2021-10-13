@@ -1,40 +1,52 @@
-// MenuViewModel.swift
+// DetailsViewModel.swift
 // Copyright © Boris. All rights reserved.
 
 import Foundation
 
-protocol MenuViewModelProtocol: AnyObject {
-    var pageDataMovie: PageDataMovie? { get set }
+protocol DetailsViewModelProtocol {
+    var details: DetailsMovie? { get set }
     var updateData: VoidHendler? { get set }
     var showError: ((String, Bool, @escaping VoidHendler) -> ())? { get set }
     func loadData()
 }
 
-final class MenuViewModel: MenuViewModelProtocol {
+final class DetailsViewModel: DetailsViewModelProtocol {
     // MARK: - Internal properties
 
-    var pageDataMovie: PageDataMovie?
-    var updateData: VoidHendler?
     var showError: ((String, Bool, @escaping VoidHendler) -> ())?
+    var details: DetailsMovie?
+    var updateData: VoidHendler?
+    var movieID: Int?
 
     // MARK: - Private propertie
 
-    private var stateView: ViewState<PageDataMovie> = .initial {
+    private var networkLayer: NetworkAPIServiceProtocol!
+
+    init(networkLayer: NetworkAPIServiceProtocol, movieID: Int?) {
+        self.networkLayer = networkLayer
+        self.movieID = movieID
+    }
+
+    private var stateView: ViewState<DetailsMovie> = .initial {
         didSet {
             switch stateView {
             case let .data(model):
-                pageDataMovie = model
+                details = model
                 updateData?()
+
             case .initial:
-                pageDataMovie = nil
+                details = nil
                 updateData?()
+
             case .loading:
                 break
             case let .error(errorType):
-                pageDataMovie = nil
+                details = nil
                 updateData?()
+
                 let errorDescription: String
                 let isReload: Bool
+
                 switch errorType {
                 case let .failure(text):
                     errorDescription = text.localizedDescription
@@ -53,17 +65,10 @@ final class MenuViewModel: MenuViewModelProtocol {
         }
     }
 
-    private var networkLayer: NetworkAPIServiceProtocol!
-
-    init(networkLayer: NetworkAPIServiceProtocol) {
-        self.networkLayer = networkLayer
-        loadData()
-    }
-
     // MARK: - Internal function
 
     func loadData() {
-        networkLayer.fetchDataMovie { [weak self] result in
+        networkLayer.fetchDataDetails(movieID: movieID) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .failure(error):
