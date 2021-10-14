@@ -1,12 +1,12 @@
-// ViewState.swift
+// DataState.swift
 // Copyright © Boris. All rights reserved.
 
 import Foundation
 
 /// ViewData
-enum ViewState<Model> {
+enum DataState<Model> {
     // Загрузка
-    case loading
+    case reLoading
     // Есть данные
     case data(_ model: Model)
     // Ошибка

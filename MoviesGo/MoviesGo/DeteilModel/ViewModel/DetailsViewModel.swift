@@ -27,13 +27,13 @@ final class DetailsViewModel: DetailsViewModelProtocol {
         self.movieID = movieID
     }
 
-    private var stateView: ViewState<DetailsMovie> = .loading {
+    private var dataState: DataState<DetailsMovie> = .reLoading {
         didSet {
-            switch stateView {
+            switch dataState {
             case let .data(model):
                 details = model
                 updateData?()
-            case .loading:
+            case .reLoading:
                 break
             case let .error(errorType):
                 details = nil
@@ -67,16 +67,18 @@ final class DetailsViewModel: DetailsViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case let .failure(error):
+
                 switch error {
                 case let .failure(error):
-                    self.stateView = .error(.failure(error))
+                    self.dataState = .error(.failure(error))
                 case .failureDecode:
-                    self.stateView = .error(.failureDecode)
+                    self.dataState = .error(.failureDecode)
                 case .notData:
-                    self.stateView = .error(.notData)
+                    self.dataState = .error(.notData)
                 }
+
             case let .success(data):
-                self.stateView = .data(data)
+                self.dataState = .data(data)
             }
         }
     }

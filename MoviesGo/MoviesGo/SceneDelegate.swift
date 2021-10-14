@@ -5,6 +5,7 @@ import UIKit
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+    var coordinator: AplicationCoordinator?
 
     func scene(
         _ scene: UIScene,
@@ -13,14 +14,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
-        let movieAPIService = MovieAPIService()
-        let menuViewModel = MenuViewModel(movieAPIService: movieAPIService)
-        let vc = MenuViewController()
-        vc.injectionViewModel(viewModel: menuViewModel)
-        let navBar = UINavigationController(rootViewController: vc)
-        window?.rootViewController = navBar
-        window?.makeKeyAndVisible()
+        let window = UIWindow(windowScene: windowScene)
+        window.makeKeyAndVisible()
+        self.window = window
+        let coordinator = MainCoordinator(assambly: Assambly())
+        coordinator.start()
     }
 }

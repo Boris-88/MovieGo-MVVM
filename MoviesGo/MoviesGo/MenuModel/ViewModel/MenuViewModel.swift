@@ -19,19 +19,21 @@ final class MenuViewModel: MenuViewModelProtocol {
 
     // MARK: - Private propertie
 
-    private var stateView: ViewState<PageDataMovie> = .loading {
+    private var dataState: DataState<PageDataMovie> = .reLoading {
         didSet {
-            switch stateView {
+            switch dataState {
             case let .data(model):
                 pageDataMovie = model
                 updateData?()
-            case .loading:
+            case .reLoading:
                 break
             case let .error(errorType):
                 pageDataMovie = nil
                 updateData?()
+
                 let errorDescription: String
                 let isReload: Bool
+
                 switch errorType {
                 case let .failure(text):
                     errorDescription = text.localizedDescription
@@ -64,15 +66,22 @@ final class MenuViewModel: MenuViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case let .failure(error):
-                print(error)
+
+                switch error {
+                case let .failure(error):
+                    self.dataState = .error(.failure(error))
+                case .failureDecode:
+                    self.dataState = .error(.failureDecode)
+                case .notData:
+                    self.dataState = .error(.notData)
+                }
+
             case let .success(data):
-                self.pageDataMovie = data
-                self.updateData?()
-                self.stateView = Bool.random() ? .error(.failure(DataError())) : .data(data)
+                self.dataState = Bool.random() ? .error(.failure(TestError())) : .data(data)
             }
         }
     }
 }
 
-/// asdgf
-struct DataError: Error {}
+// Test Error
+struct TestError: Error {}

@@ -1,9 +1,15 @@
-// DescriptionViewController.swift
+// DetailsViewController.swift
 // Copyright © Boris. All rights reserved.
 
 import UIKit
 
-final class DescriptionViewController: UIViewController {
+final class DetailsViewController: UIViewController {
+    // MARK: - Public properties
+
+    weak var coordinator: MainCoordinator?
+
+    // MARK: - Private enum
+
     private enum TypeCell {
         case poster
         case title
@@ -20,14 +26,17 @@ final class DescriptionViewController: UIViewController {
     private let titleAlertERROR = "Ошибка!"
     private var viewModel: DetailsViewModelProtocol!
 
+    // MARK: - Live cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         createTitleNC()
         createTabelView()
         reloadDataView()
     }
+
     // MARK: - Public functions
-    
+
     func injectionViewModel(viewModel: DetailsViewModelProtocol) {
         self.viewModel = viewModel
     }
@@ -83,7 +92,7 @@ final class DescriptionViewController: UIViewController {
 
 // MARK: - PRIVATE UITableViewDelegate
 
-extension DescriptionViewController: UITableViewDelegate {
+extension DetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let typeCell = typeCells[indexPath.row]
         switch typeCell {
@@ -97,7 +106,7 @@ extension DescriptionViewController: UITableViewDelegate {
 
 // MARK: - PRIVATE UITableViewDataSource
 
-extension DescriptionViewController: UITableViewDataSource {
+extension DetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         typeCells.count
     }

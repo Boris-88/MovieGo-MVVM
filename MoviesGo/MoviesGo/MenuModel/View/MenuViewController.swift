@@ -6,10 +6,11 @@ import UIKit
 final class MenuViewController: UIViewController {
     // MARK: - public properties
 
-    lazy var avatarButton = makeAvatarButton()
-    lazy var avatarImageView = makeAvatarImageView()
     lazy var collectionView = makeCollectionView()
     lazy var activitiIndicator = makeActivityIndicator()
+    weak var coordinator: MainCoordinator?
+    var onSelectID: IntHandler?
+    var avatarButton = UIButton()
 
     // MARK: - Private properties
 
@@ -17,15 +18,19 @@ final class MenuViewController: UIViewController {
     private let titleActionAlertCancle = "Отмена"
     private let titleAlertERROR = "Ошибка!"
     private var viewModel: MenuViewModelProtocol!
+    private var avatarImageView = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationController?.overrideUserInterfaceStyle = .dark
+        view.backgroundColor = .black
+        tabBarController?.tabBar.barTintColor = .white
         setupView()
         reloadDataView()
     }
+
     // MARK: - Public functions
-    
+
     func injectionViewModel(viewModel: MenuViewModelProtocol) {
         self.viewModel = viewModel
     }
@@ -46,7 +51,7 @@ final class MenuViewController: UIViewController {
         viewModel.showError = { [weak self] errorText, isReload, completion in
             guard let self = self else { return }
             self.alertShowComplition(
-                title: self.titleAlertERROR ,
+                title: self.titleAlertERROR,
                 message: errorText,
                 isAction: isReload,
                 buttonAction: self.titleActionAlert,
@@ -57,18 +62,25 @@ final class MenuViewController: UIViewController {
     }
 
     private func createAvatarButton() {
+        avatarButton.layer.cornerRadius = 17
+        avatarButton.layer.masksToBounds = true
+        avatarButton.clipsToBounds = true
+        avatarButton.layer.borderWidth = 1
+        avatarButton.layer.borderColor = UIColor.systemGray.cgColor
+        avatarButton.addSubview(avatarImageView)
+        avatarImageView.image = UIImage(named: "avatar")
+        avatarImageView.clipsToBounds = true
         let barButton = UIBarButtonItem()
         barButton.customView = avatarButton
         navigationItem.rightBarButtonItem = barButton
         avatarButton.addTarget(self, action: #selector(tapShowAvatarButton), for: .touchUpInside)
         guard let data = UserDefaults.standard.value(forKey: "avatar") as? Data else { return }
-        let image = UIImage(data: data)?.resizeImage(to: CGSize(width: 40, height: 40))
+        let image = UIImage(data: data)?.resizeImage(to: CGSize(width: 35, height: 35))
         avatarButton.setImage(image, for: .normal)
+        view.addSubview(avatarButton)
     }
 
     private func createTitleNC() {
-        navigationController?.overrideUserInterfaceStyle = .dark
-        view.backgroundColor = .black
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Смотреть"
         tabBarController?.tabBar.barTintColor = .white
@@ -86,12 +98,8 @@ final class MenuViewController: UIViewController {
 
 extension MenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movieUD = viewModel.pageDataMovie?.movies[indexPath.row].id else { return }
-        let vc = DescriptionViewController()
-        let movieAPIService = MovieAPIService()
-        let detailsViewModel = DetailsViewModel(movieAPIService: movieAPIService, movieID: movieUD)
-        vc.injectionViewModel(viewModel: detailsViewModel)
-        navigationController?.pushViewController(vc, animated: true)
+        guard let movieID = viewModel.pageDataMovie?.movies[indexPath.row].id else { return }
+        onSelectID?(movieID)
     }
 
     func collectionView(
@@ -157,5 +165,31 @@ extension MenuViewController: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         CGSize(width: 400, height: 200)
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+
+extension MenuViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
+        guard let image = info[.originalImage] as? UIImage else { return }
+        let img = image.resizeImage(to: CGSize(width: 35, height: 35))
+        avatarButton.setImage(img, for: .normal)
+        let imageData = image.pngData()
+        UserDefaults.standard.setValue(imageData, forKey: "avatar")
+        dismiss(animated: true)
+    }
+}
+
+// MARK: - Extensions UIImage
+
+extension UIImage {
+    func resizeImage(to size: CGSize) -> UIImage {
+        UIGraphicsImageRenderer(size: size).image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
+        }
     }
 }
