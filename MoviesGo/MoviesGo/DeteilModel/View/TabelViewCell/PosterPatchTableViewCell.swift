@@ -9,6 +9,7 @@ final class PosterPatchTableViewCell: UITableViewCell {
     // MARK: - PRIVATE PROPERTY
 
     private let serviceImage = ImageAPIService()
+    private let imageERROR = "error"
     private var posterImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
@@ -45,7 +46,7 @@ final class PosterPatchTableViewCell: UITableViewCell {
             case let .success(image):
                 self.posterImage.image = image
             case let .failure(error):
-                self.posterImage.image = UIImage(named: "error")
+                self.posterImage.image = UIImage(named: self.imageERROR)
                 print(error.localizedDescription)
             }
         }

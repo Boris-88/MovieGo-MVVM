@@ -23,9 +23,9 @@ final class CollectionViewCell: UICollectionViewCell {
     lazy var overviewLebel = makeOverviewLebel()
     lazy var subView = makeSubView()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
+    // MARK: - Private properie
+
+    private let imageERROR = "error"
 
     // MARK: - private functions
 
@@ -58,14 +58,9 @@ final class CollectionViewCell: UICollectionViewCell {
             case let .success(image):
                 self.posterImage.image = image
             case let .failure(error):
-                self.posterImage.image = UIImage(named: "error")
+                self.posterImage.image = UIImage(named: self.imageERROR)
                 print(error.localizedDescription)
             }
         }
-    }
-
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

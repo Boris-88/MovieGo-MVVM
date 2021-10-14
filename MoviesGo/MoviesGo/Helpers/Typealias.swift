@@ -4,3 +4,4 @@
 import Foundation
 
 typealias VoidHendler = (() -> ())
+typealias IntHandler = ((Int) -> ())
