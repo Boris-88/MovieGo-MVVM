@@ -6,9 +6,12 @@ import UIKit
 final class MainCoordinator: BaseCoordinator {
     // MARK: - Public Properties
 
-    var navController: UINavigationController?
     var onFinishFlow: VoidHendler?
-    var assambly: AssamblyPrrotocol
+
+    // MARK: - private Properties
+
+    private var navController: UINavigationController?
+    private var assambly: AssamblyPrrotocol
 
     required init(assambly: AssamblyPrrotocol, navController: UINavigationController? = nil) {
         self.assambly = assambly

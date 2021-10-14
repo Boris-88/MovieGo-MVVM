@@ -8,7 +8,6 @@ final class MenuViewController: UIViewController {
 
     lazy var collectionView = makeCollectionView()
     lazy var activitiIndicator = makeActivityIndicator()
-    weak var coordinator: MainCoordinator?
     var onSelectID: IntHandler?
     var avatarButton = UIButton()
 
@@ -99,6 +98,7 @@ final class MenuViewController: UIViewController {
 extension MenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movieID = viewModel.pageDataMovie?.movies[indexPath.row].id else { return }
+     
         onSelectID?(movieID)
     }
 

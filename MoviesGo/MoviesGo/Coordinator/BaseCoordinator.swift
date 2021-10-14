@@ -31,7 +31,7 @@ class BaseCoordinator: BaseCoordinatorProtocol {
     }
 
     func removeDependency(_ coordinator: BaseCoordinator?) {
-        guard childCoordinators.isEmpty == false,
+        guard !childCoordinators.isEmpty,
               let coordinator = coordinator
         else { return }
         for (index, element) in childCoordinators.reversed().enumerated() where element === coordinator {
@@ -41,6 +41,12 @@ class BaseCoordinator: BaseCoordinatorProtocol {
     }
 
     func setAsRoot(_ controller: UIViewController) {
-        UIApplication.shared.keyWindow?.rootViewController = controller
+        let keyWindow = UIApplication
+            .shared
+            .connectedScenes
+            .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+            .first { $0.isKeyWindow }
+
+        keyWindow?.rootViewController = controller
     }
 }

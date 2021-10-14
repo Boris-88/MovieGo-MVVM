@@ -4,10 +4,6 @@
 import UIKit
 
 final class DetailsViewController: UIViewController {
-    // MARK: - Public properties
-
-    weak var coordinator: MainCoordinator?
-
     // MARK: - Private enum
 
     private enum TypeCell {

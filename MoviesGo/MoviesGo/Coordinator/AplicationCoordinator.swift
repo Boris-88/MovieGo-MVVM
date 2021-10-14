@@ -4,10 +4,10 @@
 import UIKit
 
 final class AplicationCoordinator: BaseCoordinator {
-    // MARK: - Public properties
+    // MARK: - private properties
 
-    var assambly: AssamblyPrrotocol
-    var navController: UINavigationController?
+    private var assambly: AssamblyPrrotocol
+    private var navController: UINavigationController?
 
     required init(assambly: AssamblyPrrotocol, navController: UINavigationController? = nil) {
         self.navController = navController
