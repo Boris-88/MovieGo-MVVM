@@ -98,7 +98,8 @@ final class MenuViewController: UIViewController {
 extension MenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movieID = viewModel.pageDataMovie?.movies[indexPath.row].id else { return }
-     
+        let assembly = Assambly()
+        navigationController?.pushViewController(assembly.createDetailsViewModel(movieID: movieID), animated: true)
         onSelectID?(movieID)
     }
 
