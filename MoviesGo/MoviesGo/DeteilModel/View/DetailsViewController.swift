@@ -40,7 +40,6 @@ final class DetailsViewController: UIViewController {
     // MARK: - Private functions
 
     private func reloadDataView() {
-        viewModel.loadData()
         viewModel.updateData = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -109,16 +108,14 @@ extension DetailsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let typeCell = typeCells[indexPath.row]
+        let details = viewModel.details?[indexPath.row]
         switch typeCell {
         case .poster:
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: PosterPatchTableViewCell.reuseID,
                 for: indexPath
             ) as? PosterPatchTableViewCell else { return UITableViewCell() }
-
-            if let posterPath = viewModel.details?.posterPath {
-                cell.configCell(posterPath: posterPath)
-            }
+            cell.configCell(posterPath: details?.posterPath)
             return cell
 
         case .title:
@@ -126,7 +123,7 @@ extension DetailsViewController: UITableViewDataSource {
                 withIdentifier: TitleTableViewCell.reuseID,
                 for: indexPath
             ) as? TitleTableViewCell else { return UITableViewCell() }
-            cell.title = viewModel.details?.title
+            cell.title = details?.title
             return cell
 
         case .releaseDate:
@@ -134,8 +131,8 @@ extension DetailsViewController: UITableViewDataSource {
                 withIdentifier: ReleaseTableViewCell.reuseID,
                 for: indexPath
             ) as? ReleaseTableViewCell else { return UITableViewCell() }
-            cell.releaseDate = viewModel.details?.releaseDate
-            cell.popularyMovie = viewModel.details?.voteAverage
+            cell.releaseDate = details?.releaseDate
+            cell.popularyMovie = details?.popularity
             return cell
 
         case .overview:
@@ -143,7 +140,7 @@ extension DetailsViewController: UITableViewDataSource {
                 withIdentifier: OverviewTableViewCell.reuseID,
                 for: indexPath
             ) as? OverviewTableViewCell else { return UITableViewCell() }
-            cell.overview = viewModel.details?.overview
+            cell.overview = details?.overview
             return cell
         }
     }

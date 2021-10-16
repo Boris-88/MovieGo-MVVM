@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,7 +16,6 @@
 		CE283E0626CAE0A400B8188B /* ReleaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE283E0526CAE0A400B8188B /* ReleaseTableViewCell.swift */; };
 		CE6662C62715E514009E7A3B /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662C52715E514009E7A3B /* DetailsViewModel.swift */; };
 		CE6662CA271622FD009E7A3B /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662C9271622FD009E7A3B /* HTTPMethod.swift */; };
-		CE6662CC27163A9B009E7A3B /* ImageAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662CB27163A9B009E7A3B /* ImageAPIService.swift */; };
 		CE6662CF2716E079009E7A3B /* Assambly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662CE2716E079009E7A3B /* Assambly.swift */; };
 		CE6662D427170402009E7A3B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662D327170402009E7A3B /* Alert.swift */; };
 		CE6662D627174CB3009E7A3B /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662D527174CB3009E7A3B /* BaseCoordinator.swift */; };
@@ -25,6 +24,13 @@
 		CE6662F227181A08009E7A3B /* MoviesGoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662F127181A08009E7A3B /* MoviesGoUITests.swift */; };
 		CE6662F427181A08009E7A3B /* MoviesGoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662F327181A08009E7A3B /* MoviesGoUITestsLaunchTests.swift */; };
 		CE6662FB27181A67009E7A3B /* MovieCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662FA27181A67009E7A3B /* MovieCoordinatorTest.swift */; };
+		CE66630427186E33009E7A3B /* ImageAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66630327186E33009E7A3B /* ImageAPIService.swift */; };
+		CE66630727186FAD009E7A3B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CE66630627186FAD009E7A3B /* Realm */; };
+		CE66630927186FAD009E7A3B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE66630827186FAD009E7A3B /* RealmSwift */; };
+		CE66630C2718750D009E7A3B /* RealmDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66630B2718750D009E7A3B /* RealmDataBase.swift */; };
+		CE66630F27188D4E009E7A3B /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66630E27188D4E009E7A3B /* Repository.swift */; };
+		CE6663112719E714009E7A3B /* Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6663102719E714009E7A3B /* Proxy.swift */; };
+		CE6663132719E776009E7A3B /* CasheImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6663122719E776009E7A3B /* CasheImageService.swift */; };
 		CE6768A726B030AD004A5011 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6768A626B030AD004A5011 /* AppDelegate.swift */; };
 		CE6768A926B030AD004A5011 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6768A826B030AD004A5011 /* SceneDelegate.swift */; };
 		CE6768B026B030AE004A5011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6768AF26B030AE004A5011 /* Assets.xcassets */; };
@@ -68,7 +74,6 @@
 		CE283E0526CAE0A400B8188B /* ReleaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseTableViewCell.swift; sourceTree = "<group>"; };
 		CE6662C52715E514009E7A3B /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		CE6662C9271622FD009E7A3B /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		CE6662CB27163A9B009E7A3B /* ImageAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPIService.swift; sourceTree = "<group>"; };
 		CE6662CE2716E079009E7A3B /* Assambly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assambly.swift; sourceTree = "<group>"; };
 		CE6662D327170402009E7A3B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		CE6662D527174CB3009E7A3B /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
@@ -79,6 +84,11 @@
 		CE6662F127181A08009E7A3B /* MoviesGoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGoUITests.swift; sourceTree = "<group>"; };
 		CE6662F327181A08009E7A3B /* MoviesGoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CE6662FA27181A67009E7A3B /* MovieCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCoordinatorTest.swift; sourceTree = "<group>"; };
+		CE66630327186E33009E7A3B /* ImageAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPIService.swift; sourceTree = "<group>"; };
+		CE66630B2718750D009E7A3B /* RealmDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataBase.swift; sourceTree = "<group>"; };
+		CE66630E27188D4E009E7A3B /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		CE6663102719E714009E7A3B /* Proxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proxy.swift; sourceTree = "<group>"; };
+		CE6663122719E776009E7A3B /* CasheImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasheImageService.swift; sourceTree = "<group>"; };
 		CE6768A326B030AD004A5011 /* MoviesGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6768A626B030AD004A5011 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE6768A826B030AD004A5011 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +126,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE66630927186FAD009E7A3B /* RealmSwift in Frameworks */,
+				CE66630727186FAD009E7A3B /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,10 +168,10 @@
 			isa = PBXGroup;
 			children = (
 				CE17432526B313AB0039A6BC /* MovieAPIService.swift */,
-				CE6662CB27163A9B009E7A3B /* ImageAPIService.swift */,
 				CE17432326B30FE00039A6BC /* ResponsSessionError.swift */,
 				CE6662C9271622FD009E7A3B /* HTTPMethod.swift */,
 				CE13A10F26D031F0008C4663 /* HTTPSettigs.swift */,
+				CE66630327186E33009E7A3B /* ImageAPIService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -232,6 +244,24 @@
 			path = MoviesGoUITests;
 			sourceTree = "<group>";
 		};
+		CE66630A271874DD009E7A3B /* CoreDataBase */ = {
+			isa = PBXGroup;
+			children = (
+				CE66630B2718750D009E7A3B /* RealmDataBase.swift */,
+				CE66630E27188D4E009E7A3B /* Repository.swift */,
+			);
+			path = CoreDataBase;
+			sourceTree = "<group>";
+		};
+		CE666314271A015D009E7A3B /* ImageDataBase */ = {
+			isa = PBXGroup;
+			children = (
+				CE6663102719E714009E7A3B /* Proxy.swift */,
+				CE6663122719E776009E7A3B /* CasheImageService.swift */,
+			);
+			path = ImageDataBase;
+			sourceTree = "<group>";
+		};
 		CE67689A26B030AD004A5011 = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +286,8 @@
 		CE6768A526B030AD004A5011 /* MoviesGo */ = {
 			isa = PBXGroup;
 			children = (
+				CE666314271A015D009E7A3B /* ImageDataBase */,
+				CE66630A271874DD009E7A3B /* CoreDataBase */,
 				CE6662D02716E1C6009E7A3B /* Coordinator */,
 				CE6662CD2716E05C009E7A3B /* Assambly */,
 				CE6E56DE2714D908008628D5 /* Helpers */,
@@ -371,6 +403,10 @@
 			dependencies = (
 			);
 			name = MoviesGo;
+			packageProductDependencies = (
+				CE66630627186FAD009E7A3B /* Realm */,
+				CE66630827186FAD009E7A3B /* RealmSwift */,
+			);
 			productName = MoviesGo;
 			productReference = CE6768A326B030AD004A5011 /* MoviesGo.app */;
 			productType = "com.apple.product-type.application";
@@ -406,6 +442,9 @@
 				Base,
 			);
 			mainGroup = CE67689A26B030AD004A5011;
+			packageReferences = (
+				CE66630527186FAD009E7A3B /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+			);
 			productRefGroup = CE6768A426B030AD004A5011 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -507,12 +546,17 @@
 				CE6E56D327146680008628D5 /* DataState.swift in Sources */,
 				CE6F2A1826B0B4C7005F4E82 /* DetailsViewController.swift in Sources */,
 				CE6768C826B03659004A5011 /* CollectionViewCell.swift in Sources */,
+				CE66630C2718750D009E7A3B /* RealmDataBase.swift in Sources */,
+				CE6663112719E714009E7A3B /* Proxy.swift in Sources */,
 				CE6662D427170402009E7A3B /* Alert.swift in Sources */,
 				CE6E56D527146789008628D5 /* MenuViewModel.swift in Sources */,
 				CE17433026B353250039A6BC /* OverviewTableViewCell.swift in Sources */,
+				CE66630F27188D4E009E7A3B /* Repository.swift in Sources */,
 				CE17432C26B352BA0039A6BC /* TitleTableViewCell.swift in Sources */,
 				CE6768CB26B03659004A5011 /* MenuViewController.swift in Sources */,
+				CE6663132719E776009E7A3B /* CasheImageService.swift in Sources */,
 				CE6662C62715E514009E7A3B /* DetailsViewModel.swift in Sources */,
+				CE66630427186E33009E7A3B /* ImageAPIService.swift in Sources */,
 				CE6662DB27174D88009E7A3B /* MainCoordinator.swift in Sources */,
 				CE17432A26B352810039A6BC /* PosterPatchTableViewCell.swift in Sources */,
 				CE13A11026D031F0008C4663 /* HTTPSettigs.swift in Sources */,
@@ -527,7 +571,6 @@
 				CE6768A726B030AD004A5011 /* AppDelegate.swift in Sources */,
 				CE283E0626CAE0A400B8188B /* ReleaseTableViewCell.swift in Sources */,
 				CE6E56DB2714B762008628D5 /* ModelMovie.swift in Sources */,
-				CE6662CC27163A9B009E7A3B /* ImageAPIService.swift in Sources */,
 				CE6768A926B030AD004A5011 /* SceneDelegate.swift in Sources */,
 				CE6E56D727147D47008628D5 /* CollectionViewCell + Extension.swift in Sources */,
 				CE17432426B30FE00039A6BC /* ResponsSessionError.swift in Sources */,
@@ -847,6 +890,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE66630527186FAD009E7A3B /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE66630627186FAD009E7A3B /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE66630527186FAD009E7A3B /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		CE66630827186FAD009E7A3B /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE66630527186FAD009E7A3B /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CE67689B26B030AD004A5011 /* Project object */;
 }

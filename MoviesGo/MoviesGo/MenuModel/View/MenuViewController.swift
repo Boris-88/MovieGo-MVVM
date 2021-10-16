@@ -97,7 +97,7 @@ final class MenuViewController: UIViewController {
 
 extension MenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movieID = viewModel.pageDataMovie?.movies[indexPath.row].id else { return }
+        guard let movieID = viewModel.movies?[indexPath.row].id else { return }
         let assembly = Assambly()
         navigationController?.pushViewController(assembly.createDetailsViewModel(movieID: movieID), animated: true)
         onSelectID?(movieID)
@@ -135,7 +135,7 @@ extension MenuViewController: UICollectionViewDelegate {
 
 extension MenuViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.pageDataMovie?.movies.count ?? 0
+        viewModel.movies?.count ?? 0
     }
 
     func collectionView(
@@ -147,13 +147,11 @@ extension MenuViewController: UICollectionViewDataSource {
             for: indexPath
         ) as?
             CollectionViewCell else { return UICollectionViewCell() }
-        if let item = viewModel.pageDataMovie {
-            let movie = item.movies[indexPath.row]
-            cell.configCellImage(posterPath: movie.posterPath)
-            cell.configurCell(movie: movie)
-            return cell
+        if let movies = viewModel.movies?[indexPath.row] {
+            cell.configCellImage(posterPath: movies.posterPath)
+            cell.configurCell(movie: movies)
         }
-        return UICollectionViewCell()
+        return cell
     }
 }
 
