@@ -4,7 +4,7 @@
 import Foundation
 
 protocol MovieAPIServiceProtocol {
-    func fetchDataMovie(completion: @escaping (Swift.Result<PageDataMovie, ResponsSessionError>) -> Void)
+    func fetchDataMovie(completion: @escaping (Swift.Result<[Movie], ResponsSessionError>) -> Void)
     func fetchDataDetails(
         movieID: Int,
         completion: @escaping (Swift.Result<DetailsMovie, ResponsSessionError>) -> Void
@@ -12,7 +12,13 @@ protocol MovieAPIServiceProtocol {
 }
 
 final class MovieAPIService: MovieAPIServiceProtocol {
-    func fetchDataMovie(completion: @escaping (Swift.Result<PageDataMovie, ResponsSessionError>) -> Void) {
+    private var decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
+
+    func fetchDataMovie(completion: @escaping (Swift.Result<[Movie], ResponsSessionError>) -> Void) {
         let urlString = HTTPSettigs.baseURL + "\(HTTPMethod.popular)" + "?" + "api_key=\(HTTPSettigs.apiKey)" + "&" +
             "language=\(HTTPSettigs.language)"
 
@@ -20,9 +26,10 @@ final class MovieAPIService: MovieAPIServiceProtocol {
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else { return }
             do {
-                let resData = try JSONDecoder().decode(PageDataMovie.self, from: data)
+                let resData = try self.decoder.decode(PageDataMovie.self, from: data)
+
                 DispatchQueue.main.async {
-                    completion(.success(resData))
+                    completion(.success(resData.results))
                 }
             } catch let error as ResponsSessionError {
                 completion(.failure(error))
@@ -50,7 +57,6 @@ final class MovieAPIService: MovieAPIServiceProtocol {
                 let resData = try JSONDecoder().decode(DetailsMovie.self, from: data)
                 DispatchQueue.main.async {
                     completion(.success(resData))
-                    print(resData)
                 }
             } catch let error as ResponsSessionError {
                 completion(.failure(error))

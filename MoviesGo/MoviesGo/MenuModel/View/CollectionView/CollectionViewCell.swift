@@ -52,14 +52,17 @@ final class CollectionViewCell: UICollectionViewCell {
     }
 
     func configCellImage(posterPath: String?) {
-        serviceImage.updateImage(posterPath: posterPath) { [weak self] result in
+        guard let posterPath = posterPath,
+              let url = URL(string: HTTPSettigs.imageHost + posterPath)
+        else { return }
+        serviceImage.getPhoto(url: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case let .success(image):
-                self.posterImage.image = image
             case let .failure(error):
                 self.posterImage.image = UIImage(named: self.imageERROR)
-                print(error.localizedDescription)
+
+            case let .success(image):
+                self.posterImage.image = image
             }
         }
     }

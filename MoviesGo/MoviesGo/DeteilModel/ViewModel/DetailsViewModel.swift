@@ -4,7 +4,7 @@
 import Foundation
 
 protocol DetailsViewModelProtocol {
-    var details: DetailsMovie? { get set }
+    var details: [DetailsMovie]? { get set }
     var updateData: VoidHendler? { get set }
     var showError: ((String, Bool, @escaping VoidHendler) -> ())? { get set }
     func loadData()
@@ -14,24 +14,20 @@ final class DetailsViewModel: DetailsViewModelProtocol {
     // MARK: - Internal properties
 
     var showError: ((String, Bool, @escaping VoidHendler) -> ())?
-    var details: DetailsMovie?
+    var details: [DetailsMovie]?
     var updateData: VoidHendler?
     var movieID: Int
 
     // MARK: - Private propertie
 
     private var movieAPIService: MovieAPIServiceProtocol!
-
-    init(movieAPIService: MovieAPIServiceProtocol, movieID: Int) {
-        self.movieAPIService = movieAPIService
-        self.movieID = movieID
-    }
+    private var repository: RepositoryProtocol
 
     private var dataState: DataState<DetailsMovie> = .reLoading {
         didSet {
             switch dataState {
             case let .data(model):
-                details = model
+                details = [model]
                 updateData?()
             case .reLoading:
                 break
@@ -60,9 +56,24 @@ final class DetailsViewModel: DetailsViewModelProtocol {
         }
     }
 
+    // MARK: - init
+
+    init(movieAPIService: MovieAPIServiceProtocol, movieID: Int, repository: RepositoryProtocol) {
+        self.movieAPIService = movieAPIService
+        self.movieID = movieID
+        self.repository = repository
+    }
+
     // MARK: - Internal function
 
     func loadData() {
+        let object = repository.getObjectDetailsMovie(object: details)
+
+        if !(object?.isEmpty ?? true) {
+            details = object
+            return
+        }
+
         movieAPIService.fetchDataDetails(movieID: movieID) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -77,8 +88,9 @@ final class DetailsViewModel: DetailsViewModelProtocol {
                     self.dataState = .error(.notData)
                 }
 
-            case let .success(data):
-                self.dataState = .data(data)
+            case let .success(details):
+                self.repository.saveObjectDetailsMovie(object: [details])
+                self.dataState = .data(details)
             }
         }
     }
