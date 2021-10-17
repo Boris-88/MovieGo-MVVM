@@ -22,15 +22,22 @@
 		CE6662D827174D02009E7A3B /* AplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662D727174D02009E7A3B /* AplicationCoordinator.swift */; };
 		CE6662DB27174D88009E7A3B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662DA27174D88009E7A3B /* MainCoordinator.swift */; };
 		CE6662F227181A08009E7A3B /* MoviesGoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662F127181A08009E7A3B /* MoviesGoUITests.swift */; };
-		CE6662F427181A08009E7A3B /* MoviesGoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662F327181A08009E7A3B /* MoviesGoUITestsLaunchTests.swift */; };
 		CE6662FB27181A67009E7A3B /* MovieCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6662FA27181A67009E7A3B /* MovieCoordinatorTest.swift */; };
 		CE66630427186E33009E7A3B /* ImageAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66630327186E33009E7A3B /* ImageAPIService.swift */; };
 		CE66630727186FAD009E7A3B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CE66630627186FAD009E7A3B /* Realm */; };
 		CE66630927186FAD009E7A3B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE66630827186FAD009E7A3B /* RealmSwift */; };
 		CE66630C2718750D009E7A3B /* RealmDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66630B2718750D009E7A3B /* RealmDataBase.swift */; };
-		CE66630F27188D4E009E7A3B /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66630E27188D4E009E7A3B /* Repository.swift */; };
+		CE66630F27188D4E009E7A3B /* MenuRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66630E27188D4E009E7A3B /* MenuRepository.swift */; };
 		CE6663112719E714009E7A3B /* Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6663102719E714009E7A3B /* Proxy.swift */; };
 		CE6663132719E776009E7A3B /* CasheImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6663122719E776009E7A3B /* CasheImageService.swift */; };
+		CE666316271C3E91009E7A3B /* MenuViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE666315271C3E91009E7A3B /* MenuViewModelTest.swift */; };
+		CE666318271C6EAF009E7A3B /* DetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE666317271C6EAF009E7A3B /* DetailsRepository.swift */; };
+		CE66631B271CB97F009E7A3B /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66631A271CB97F009E7A3B /* MockNavigationController.swift */; };
+		CE66631D271CB9E1009E7A3B /* MockMoviAppiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66631C271CB9E1009E7A3B /* MockMoviAppiService.swift */; };
+		CE66631F271CBA61009E7A3B /* MockMenuRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66631E271CBA61009E7A3B /* MockMenuRepository.swift */; };
+		CE666321271CBA96009E7A3B /* MockDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE666320271CBA96009E7A3B /* MockDetailsRepository.swift */; };
+		CE666323271CBAED009E7A3B /* AssemblyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE666322271CBAED009E7A3B /* AssemblyTest.swift */; };
+		CE666325271CBB48009E7A3B /* DetailsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE666324271CBB48009E7A3B /* DetailsViewModelTest.swift */; };
 		CE6768A726B030AD004A5011 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6768A626B030AD004A5011 /* AppDelegate.swift */; };
 		CE6768A926B030AD004A5011 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6768A826B030AD004A5011 /* SceneDelegate.swift */; };
 		CE6768B026B030AE004A5011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6768AF26B030AE004A5011 /* Assets.xcassets */; };
@@ -82,13 +89,20 @@
 		CE6662E2271819FC009E7A3B /* MoviesGoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoviesGoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6662EF27181A08009E7A3B /* MoviesGoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoviesGoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6662F127181A08009E7A3B /* MoviesGoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGoUITests.swift; sourceTree = "<group>"; };
-		CE6662F327181A08009E7A3B /* MoviesGoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CE6662FA27181A67009E7A3B /* MovieCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCoordinatorTest.swift; sourceTree = "<group>"; };
 		CE66630327186E33009E7A3B /* ImageAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPIService.swift; sourceTree = "<group>"; };
 		CE66630B2718750D009E7A3B /* RealmDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataBase.swift; sourceTree = "<group>"; };
-		CE66630E27188D4E009E7A3B /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		CE66630E27188D4E009E7A3B /* MenuRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRepository.swift; sourceTree = "<group>"; };
 		CE6663102719E714009E7A3B /* Proxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proxy.swift; sourceTree = "<group>"; };
 		CE6663122719E776009E7A3B /* CasheImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasheImageService.swift; sourceTree = "<group>"; };
+		CE666315271C3E91009E7A3B /* MenuViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModelTest.swift; sourceTree = "<group>"; };
+		CE666317271C6EAF009E7A3B /* DetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRepository.swift; sourceTree = "<group>"; };
+		CE66631A271CB97F009E7A3B /* MockNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNavigationController.swift; sourceTree = "<group>"; };
+		CE66631C271CB9E1009E7A3B /* MockMoviAppiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMoviAppiService.swift; sourceTree = "<group>"; };
+		CE66631E271CBA61009E7A3B /* MockMenuRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMenuRepository.swift; sourceTree = "<group>"; };
+		CE666320271CBA96009E7A3B /* MockDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailsRepository.swift; sourceTree = "<group>"; };
+		CE666322271CBAED009E7A3B /* AssemblyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyTest.swift; sourceTree = "<group>"; };
+		CE666324271CBB48009E7A3B /* DetailsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModelTest.swift; sourceTree = "<group>"; };
 		CE6768A326B030AD004A5011 /* MoviesGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6768A626B030AD004A5011 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE6768A826B030AD004A5011 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -230,7 +244,11 @@
 		CE6662E3271819FC009E7A3B /* MoviesGoTests */ = {
 			isa = PBXGroup;
 			children = (
+				CE666319271CB965009E7A3B /* Mocke */,
 				CE6662FA27181A67009E7A3B /* MovieCoordinatorTest.swift */,
+				CE666315271C3E91009E7A3B /* MenuViewModelTest.swift */,
+				CE666322271CBAED009E7A3B /* AssemblyTest.swift */,
+				CE666324271CBB48009E7A3B /* DetailsViewModelTest.swift */,
 			);
 			path = MoviesGoTests;
 			sourceTree = "<group>";
@@ -239,7 +257,6 @@
 			isa = PBXGroup;
 			children = (
 				CE6662F127181A08009E7A3B /* MoviesGoUITests.swift */,
-				CE6662F327181A08009E7A3B /* MoviesGoUITestsLaunchTests.swift */,
 			);
 			path = MoviesGoUITests;
 			sourceTree = "<group>";
@@ -248,7 +265,8 @@
 			isa = PBXGroup;
 			children = (
 				CE66630B2718750D009E7A3B /* RealmDataBase.swift */,
-				CE66630E27188D4E009E7A3B /* Repository.swift */,
+				CE66630E27188D4E009E7A3B /* MenuRepository.swift */,
+				CE666317271C6EAF009E7A3B /* DetailsRepository.swift */,
 			);
 			path = CoreDataBase;
 			sourceTree = "<group>";
@@ -260,6 +278,17 @@
 				CE6663122719E776009E7A3B /* CasheImageService.swift */,
 			);
 			path = ImageDataBase;
+			sourceTree = "<group>";
+		};
+		CE666319271CB965009E7A3B /* Mocke */ = {
+			isa = PBXGroup;
+			children = (
+				CE66631A271CB97F009E7A3B /* MockNavigationController.swift */,
+				CE66631C271CB9E1009E7A3B /* MockMoviAppiService.swift */,
+				CE66631E271CBA61009E7A3B /* MockMenuRepository.swift */,
+				CE666320271CBA96009E7A3B /* MockDetailsRepository.swift */,
+			);
+			path = Mocke;
 			sourceTree = "<group>";
 		};
 		CE67689A26B030AD004A5011 = {
@@ -526,7 +555,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE666321271CBA96009E7A3B /* MockDetailsRepository.swift in Sources */,
+				CE666323271CBAED009E7A3B /* AssemblyTest.swift in Sources */,
 				CE6662FB27181A67009E7A3B /* MovieCoordinatorTest.swift in Sources */,
+				CE666316271C3E91009E7A3B /* MenuViewModelTest.swift in Sources */,
+				CE66631D271CB9E1009E7A3B /* MockMoviAppiService.swift in Sources */,
+				CE66631F271CBA61009E7A3B /* MockMenuRepository.swift in Sources */,
+				CE66631B271CB97F009E7A3B /* MockNavigationController.swift in Sources */,
+				CE666325271CBB48009E7A3B /* DetailsViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,7 +570,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE6662F427181A08009E7A3B /* MoviesGoUITestsLaunchTests.swift in Sources */,
 				CE6662F227181A08009E7A3B /* MoviesGoUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -551,7 +586,7 @@
 				CE6662D427170402009E7A3B /* Alert.swift in Sources */,
 				CE6E56D527146789008628D5 /* MenuViewModel.swift in Sources */,
 				CE17433026B353250039A6BC /* OverviewTableViewCell.swift in Sources */,
-				CE66630F27188D4E009E7A3B /* Repository.swift in Sources */,
+				CE66630F27188D4E009E7A3B /* MenuRepository.swift in Sources */,
 				CE17432C26B352BA0039A6BC /* TitleTableViewCell.swift in Sources */,
 				CE6768CB26B03659004A5011 /* MenuViewController.swift in Sources */,
 				CE6663132719E776009E7A3B /* CasheImageService.swift in Sources */,
@@ -567,6 +602,7 @@
 				CE6662D627174CB3009E7A3B /* BaseCoordinator.swift in Sources */,
 				CE6662CA271622FD009E7A3B /* HTTPMethod.swift in Sources */,
 				CE6662CF2716E079009E7A3B /* Assambly.swift in Sources */,
+				CE666318271C6EAF009E7A3B /* DetailsRepository.swift in Sources */,
 				CE6E56D927148796008628D5 /* MenuViewController + Extension.swift in Sources */,
 				CE6768A726B030AD004A5011 /* AppDelegate.swift in Sources */,
 				CE283E0626CAE0A400B8188B /* ReleaseTableViewCell.swift in Sources */,
@@ -820,6 +856,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MoviesGo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -838,6 +875,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MoviesGo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

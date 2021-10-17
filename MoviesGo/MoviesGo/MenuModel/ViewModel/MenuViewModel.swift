@@ -54,9 +54,9 @@ final class MenuViewModel: MenuViewModelProtocol {
     }
 
     private var movieAPIService: MovieAPIServiceProtocol!
-    private var repository: RepositoryProtocol
+    private var repository: RepositoryMenuProtocol
 
-    init(movieAPIService: MovieAPIServiceProtocol, repository: RepositoryProtocol) {
+    init(movieAPIService: MovieAPIServiceProtocol, repository: RepositoryMenuProtocol) {
         self.movieAPIService = movieAPIService
         self.repository = repository
         loadData()
@@ -65,32 +65,35 @@ final class MenuViewModel: MenuViewModelProtocol {
     // MARK: - Internal function
 
     func loadData() {
-        let object = repository.getObjectMovie(object: movies)
-        if object?.isEmpty != nil {
-            DispatchQueue.main.async {
-                self.movies = object
-            }
-        }
+        movies?.removeAll()
+        let casheObject = repository.getObjectMovie(object: movies)
 
-        movieAPIService.fetchDataMovie { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case let .failure(error):
-
-                switch error {
+        if (casheObject?.isEmpty) != nil {
+            movieAPIService.fetchDataMovie { [weak self] result in
+                guard let self = self else { return }
+                switch result {
                 case let .failure(error):
-                    self.dataState = .error(.failure(error))
-                case .failureDecode:
-                    self.dataState = .error(.failureDecode)
-                case .notData:
-                    self.dataState = .error(.notData)
-                }
 
-            case let .success(movies):
-                DispatchQueue.main.async {
-                    self.repository.saveObjectMovie(object: movies)
-                    self.dataState = Bool.random() ? .error(.failure(TestError())) : .data(movies)
+                    switch error {
+                    case let .failure(error):
+                        self.dataState = .error(.failure(error))
+                    case .failureDecode:
+                        self.dataState = .error(.failureDecode)
+                    case .notData:
+                        self.dataState = .error(.notData)
+                    }
+
+                case let .success(movies):
+                    DispatchQueue.main.async {
+                        self.repository.saveObjectMovie(object: movies)
+                        self.dataState = Bool.random() ? .error(.failure(TestError())) : .data(movies)
+                    }
                 }
+            }
+        } else {
+            movies = casheObject
+            DispatchQueue.main.async {
+                self.updateData?()
             }
         }
     }

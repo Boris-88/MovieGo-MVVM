@@ -5,15 +5,6 @@
 import UIKit
 import XCTest
 
-final class MockNavigationController: UINavigationController {
-    var presentedVC: UIViewController?
-
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        presentedVC = viewController
-        super.pushViewController(viewController, animated: animated)
-    }
-}
-
 final class MovieCoordinatorTest: XCTestCase {
     var aplicationCoordinator: AplicationCoordinator!
     var navController: MockNavigationController!

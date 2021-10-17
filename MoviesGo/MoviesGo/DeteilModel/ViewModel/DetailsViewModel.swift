@@ -21,7 +21,7 @@ final class DetailsViewModel: DetailsViewModelProtocol {
     // MARK: - Private propertie
 
     private var movieAPIService: MovieAPIServiceProtocol!
-    private var repository: RepositoryProtocol
+    private var repository: RepositoryDetailsProtocol!
 
     private var dataState: DataState<DetailsMovie> = .reLoading {
         didSet {
@@ -58,39 +58,46 @@ final class DetailsViewModel: DetailsViewModelProtocol {
 
     // MARK: - init
 
-    init(movieAPIService: MovieAPIServiceProtocol, movieID: Int, repository: RepositoryProtocol) {
+    init(movieAPIService: MovieAPIServiceProtocol, movieID: Int, repository: RepositoryDetailsProtocol) {
         self.movieAPIService = movieAPIService
         self.movieID = movieID
         self.repository = repository
+        loadData()
     }
 
     // MARK: - Internal function
 
     func loadData() {
-        let object = repository.getObjectDetailsMovie(object: details)
+        details?.removeAll()
 
-        if !(object?.isEmpty ?? true) {
-            details = object
-            return
-        }
+        let casheObject = repository.getObjectDetailsMovie(object: details)
 
-        movieAPIService.fetchDataDetails(movieID: movieID) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case let .failure(error):
-
-                switch error {
+        if (casheObject?.isEmpty) != nil {
+            movieAPIService.fetchDataDetails(movieID: movieID) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
                 case let .failure(error):
-                    self.dataState = .error(.failure(error))
-                case .failureDecode:
-                    self.dataState = .error(.failureDecode)
-                case .notData:
-                    self.dataState = .error(.notData)
-                }
 
-            case let .success(details):
-                self.repository.saveObjectDetailsMovie(object: [details])
-                self.dataState = .data(details)
+                    switch error {
+                    case let .failure(error):
+                        self.dataState = .error(.failure(error))
+                    case .failureDecode:
+                        self.dataState = .error(.failureDecode)
+                    case .notData:
+                        self.dataState = .error(.notData)
+                    }
+
+                case let .success(details):
+                    DispatchQueue.main.async {
+                        self.repository.saveObjectDetailsMovie(object: [details])
+                        self.dataState = Bool.random() ? .error(.failure(TestError())) : .data(details)
+                    }
+                }
+            }
+        } else {
+            details = casheObject
+            DispatchQueue.main.async {
+                self.updateData?()
             }
         }
     }

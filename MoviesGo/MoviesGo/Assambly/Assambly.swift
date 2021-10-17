@@ -13,7 +13,7 @@ final class Assambly: AssamblyPrrotocol {
     func createMenuViewModel() -> UIViewController {
         let menuVC = MenuViewController()
         let movieAPIService = MovieAPIService()
-        let repository = Repository()
+        let repository = MenuRepository()
         let menuViewModel = MenuViewModel(movieAPIService: movieAPIService, repository: repository)
         menuVC.injectionViewModel(viewModel: menuViewModel)
         return menuVC
@@ -22,7 +22,7 @@ final class Assambly: AssamblyPrrotocol {
     func createDetailsViewModel(movieID: Int) -> UIViewController {
         let detailsVC = DetailsViewController()
         let movieAPIService = MovieAPIService()
-        let repositoty = Repository()
+        let repositoty = DetailsRepository()
         let detailsViewModel = DetailsViewModel(
             movieAPIService: movieAPIService,
             movieID: movieID,

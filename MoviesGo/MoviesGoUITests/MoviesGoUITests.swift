@@ -4,22 +4,31 @@
 import XCTest
 
 final class MoviesGoUITests: XCTestCase {
+    var aplication = XCUIApplication()
+
     override func setUpWithError() throws {
         continueAfterFailure = false
+        aplication = XCUIApplication()
+        aplication.launch()
     }
-
-    override func tearDownWithError() throws {}
 
     func testExample() throws {
-        let app = XCUIApplication()
-        app.launch()
+        aplication.launch()
+        let collectionView = aplication.collectionViews["collectionView"]
+        collectionView.swipeDown()
+        let tapCell = aplication.cells.element(boundBy: 7)
+        tapCell.tap()
+        RunLoop.current.run(until: Date(timeInterval: 2, since: Date()))
+        let labelOnSecondScreen = aplication.staticTexts["DescriptionModuleTitle"]
+        XCTAssertTrue(!labelOnSecondScreen.label.isEmpty)
     }
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    func testPosterImage() {
+        let movieModuleTableView = aplication.tables["tableView"]
+        movieModuleTableView.swipeDown()
+        let tapEihtCell = movieModuleTableView.cells.element(boundBy: 7)
+        tapEihtCell.tap()
+        let imagePoster = XCUIApplication().images["PosterPatchTableViewCell"]
+        XCTAssert(imagePoster.exists)
     }
 }
