@@ -1,5 +1,5 @@
 // MovieCoordinatorTest.swift
-// Copyright © Boris. All rights reserved.
+// Copyright © Boris Zverik. All rights reserved.
 
 @testable import MoviesGo
 import UIKit
@@ -8,7 +8,7 @@ import XCTest
 final class MovieCoordinatorTest: XCTestCase {
     var aplicationCoordinator: AplicationCoordinator!
     var navController: MockNavigationController!
-    var assambly: AssamblyPrrotocol!
+    var assambly: AssamblyProtocol!
 
     override func setUpWithError() throws {
         navController = MockNavigationController()

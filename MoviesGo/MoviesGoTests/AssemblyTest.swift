@@ -1,5 +1,5 @@
 // AssemblyTest.swift
-// Copyright © Boris. All rights reserved.
+// Copyright © Boris Zverik. All rights reserved.
 
 //
 //  AssemblyTest.swift
@@ -12,7 +12,7 @@ import UIKit
 import XCTest
 
 final class AssemblyTest: XCTestCase {
-    var assambly: AssamblyPrrotocol!
+    var assambly: AssamblyProtocol!
 
     override func setUpWithError() throws {
         assambly = Assambly()

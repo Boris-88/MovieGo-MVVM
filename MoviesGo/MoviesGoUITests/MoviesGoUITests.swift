@@ -1,5 +1,5 @@
 // MoviesGoUITests.swift
-// Copyright © Boris. All rights reserved.
+// Copyright © Boris Zverik. All rights reserved.
 
 import XCTest
 

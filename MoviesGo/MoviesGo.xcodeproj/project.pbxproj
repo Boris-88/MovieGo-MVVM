@@ -52,6 +52,15 @@
 		CE6E56DB2714B762008628D5 /* ModelMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E56DA2714B762008628D5 /* ModelMovie.swift */; };
 		CE6E56E02714D931008628D5 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E56DF2714D931008628D5 /* Typealias.swift */; };
 		CE6F2A1826B0B4C7005F4E82 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F2A1726B0B4C7005F4E82 /* DetailsViewController.swift */; };
+		CEFB3D2427234BD000C02EFA /* BaseCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB3D2327234BD000C02EFA /* BaseCoordinatorProtocol.swift */; };
+		CEFB3D2627234C2B00C02EFA /* AssamblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB3D2527234C2B00C02EFA /* AssamblyProtocol.swift */; };
+		CEFB3D2927234C6F00C02EFA /* RealmDataBaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB3D2827234C6F00C02EFA /* RealmDataBaseProtocol.swift */; };
+		CEFB3D2B27234D5000C02EFA /* RepositoryMenuProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB3D2A27234D5000C02EFA /* RepositoryMenuProtocol.swift */; };
+		CEFB3D2D27234D8600C02EFA /* RepositoryDetailsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB3D2C27234D8600C02EFA /* RepositoryDetailsProtocol.swift */; };
+		CEFB3D2F27234DBE00C02EFA /* ImageAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB3D2E27234DBE00C02EFA /* ImageAPIServiceProtocol.swift */; };
+		CEFB3D3127234DEC00C02EFA /* MovieAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB3D3027234DEC00C02EFA /* MovieAPIServiceProtocol.swift */; };
+		CEFB3D3327234E1A00C02EFA /* LoadImageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB3D3227234E1A00C02EFA /* LoadImageProtocol.swift */; };
+		CEFB3D3527234E3F00C02EFA /* CacheImageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB3D3427234E3F00C02EFA /* CacheImageServiceProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +128,15 @@
 		CE6E56DA2714B762008628D5 /* ModelMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMovie.swift; sourceTree = "<group>"; };
 		CE6E56DF2714D931008628D5 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		CE6F2A1726B0B4C7005F4E82 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		CEFB3D2327234BD000C02EFA /* BaseCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		CEFB3D2527234C2B00C02EFA /* AssamblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssamblyProtocol.swift; sourceTree = "<group>"; };
+		CEFB3D2827234C6F00C02EFA /* RealmDataBaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataBaseProtocol.swift; sourceTree = "<group>"; };
+		CEFB3D2A27234D5000C02EFA /* RepositoryMenuProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryMenuProtocol.swift; sourceTree = "<group>"; };
+		CEFB3D2C27234D8600C02EFA /* RepositoryDetailsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailsProtocol.swift; sourceTree = "<group>"; };
+		CEFB3D2E27234DBE00C02EFA /* ImageAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPIServiceProtocol.swift; sourceTree = "<group>"; };
+		CEFB3D3027234DEC00C02EFA /* MovieAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIServiceProtocol.swift; sourceTree = "<group>"; };
+		CEFB3D3227234E1A00C02EFA /* LoadImageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageProtocol.swift; sourceTree = "<group>"; };
+		CEFB3D3427234E3F00C02EFA /* CacheImageServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageServiceProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,29 +191,19 @@
 			children = (
 				CE6662C42715E3E2009E7A3B /* View */,
 				CE6662C32715E3D5009E7A3B /* ViewModel */,
-				CE6662C22715E3CD009E7A3B /* Model */,
 			);
 			path = DeteilModel;
 			sourceTree = "<group>";
 		};
-		CE17433426B353A60039A6BC /* Service */ = {
+		CE17433426B353A60039A6BC /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				CE17432526B313AB0039A6BC /* MovieAPIService.swift */,
 				CE17432326B30FE00039A6BC /* ResponsSessionError.swift */,
 				CE6662C9271622FD009E7A3B /* HTTPMethod.swift */,
 				CE13A10F26D031F0008C4663 /* HTTPSettigs.swift */,
-				CE66630327186E33009E7A3B /* ImageAPIService.swift */,
 			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		CE6662C22715E3CD009E7A3B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				CE6768C626B03659004A5011 /* DetailsModel.swift */,
-			);
-			path = Model;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		CE6662C32715E3D5009E7A3B /* ViewModel */ = {
@@ -215,30 +223,21 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		CE6662CD2716E05C009E7A3B /* Assambly */ = {
+		CE6662CD2716E05C009E7A3B /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
 				CE6662CE2716E079009E7A3B /* Assambly.swift */,
 			);
-			path = Assambly;
+			path = Assembly;
 			sourceTree = "<group>";
 		};
 		CE6662D02716E1C6009E7A3B /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				CE6662D927174D6D009E7A3B /* ChildCooordinator */,
 				CE6662D527174CB3009E7A3B /* BaseCoordinator.swift */,
 				CE6662D727174D02009E7A3B /* AplicationCoordinator.swift */,
 			);
 			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		CE6662D927174D6D009E7A3B /* ChildCooordinator */ = {
-			isa = PBXGroup;
-			children = (
-				CE6662DA27174D88009E7A3B /* MainCoordinator.swift */,
-			);
-			path = ChildCooordinator;
 			sourceTree = "<group>";
 		};
 		CE6662E3271819FC009E7A3B /* MoviesGoTests */ = {
@@ -261,14 +260,14 @@
 			path = MoviesGoUITests;
 			sourceTree = "<group>";
 		};
-		CE66630A271874DD009E7A3B /* CoreDataBase */ = {
+		CE66630A271874DD009E7A3B /* RealmDataBase */ = {
 			isa = PBXGroup;
 			children = (
 				CE66630B2718750D009E7A3B /* RealmDataBase.swift */,
 				CE66630E27188D4E009E7A3B /* MenuRepository.swift */,
 				CE666317271C6EAF009E7A3B /* DetailsRepository.swift */,
 			);
-			path = CoreDataBase;
+			path = RealmDataBase;
 			sourceTree = "<group>";
 		};
 		CE666314271A015D009E7A3B /* ImageDataBase */ = {
@@ -315,19 +314,12 @@
 		CE6768A526B030AD004A5011 /* MoviesGo */ = {
 			isa = PBXGroup;
 			children = (
-				CE666314271A015D009E7A3B /* ImageDataBase */,
-				CE66630A271874DD009E7A3B /* CoreDataBase */,
-				CE6662D02716E1C6009E7A3B /* Coordinator */,
-				CE6662CD2716E05C009E7A3B /* Assambly */,
-				CE6E56DE2714D908008628D5 /* Helpers */,
-				CE6E56E12714E77D008628D5 /* MenuModel */,
-				CE17433326B3536E0039A6BC /* DeteilModel */,
-				CE17433426B353A60039A6BC /* Service */,
-				CE6768A626B030AD004A5011 /* AppDelegate.swift */,
-				CE6768A826B030AD004A5011 /* SceneDelegate.swift */,
-				CE6768AF26B030AE004A5011 /* Assets.xcassets */,
-				CE6768B126B030AE004A5011 /* LaunchScreen.storyboard */,
-				CE6768B426B030AE004A5011 /* Info.plist */,
+				CEFB3D1C2723493F00C02EFA /* Application */,
+				CEFB3D1A2723489300C02EFA /* Data */,
+				CEFB3D2127234B3600C02EFA /* Domain */,
+				CEFB3D1F272349A400C02EFA /* Resources */,
+				CEFB3D1E2723498500C02EFA /* Presentation */,
+				CEFB3D1D2723495E00C02EFA /* Environments */,
 			);
 			path = MoviesGo;
 			sourceTree = "<group>";
@@ -347,17 +339,8 @@
 			children = (
 				CE6E56E42714E7B0008628D5 /* ViewModel */,
 				CE6E56E32714E7A3008628D5 /* View */,
-				CE6E56E22714E79B008628D5 /* Model */,
 			);
 			path = MenuModel;
-			sourceTree = "<group>";
-		};
-		CE6E56E22714E79B008628D5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				CE6E56DA2714B762008628D5 /* ModelMovie.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		CE6E56E32714E7A3008628D5 /* View */ = {
@@ -376,6 +359,122 @@
 				CE6E56D427146789008628D5 /* MenuViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CEFB3D1A2723489300C02EFA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				CE66630A271874DD009E7A3B /* RealmDataBase */,
+				CE17433426B353A60039A6BC /* Network */,
+				CE666314271A015D009E7A3B /* ImageDataBase */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		CEFB3D1B272348A300C02EFA /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				CE6E56DA2714B762008628D5 /* ModelMovie.swift */,
+				CE6768C626B03659004A5011 /* DetailsModel.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		CEFB3D1C2723493F00C02EFA /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				CE6662CD2716E05C009E7A3B /* Assembly */,
+				CEFB3D38272350CE00C02EFA /* Core */,
+				CE6662D02716E1C6009E7A3B /* Coordinator */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		CEFB3D1D2723495E00C02EFA /* Environments */ = {
+			isa = PBXGroup;
+			children = (
+				CE6768B426B030AE004A5011 /* Info.plist */,
+			);
+			path = Environments;
+			sourceTree = "<group>";
+		};
+		CEFB3D1E2723498500C02EFA /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CEFB3D3727234F7100C02EFA /* Flow */,
+				CE6E56DE2714D908008628D5 /* Helpers */,
+				CE6E56E12714E77D008628D5 /* MenuModel */,
+				CE17433326B3536E0039A6BC /* DeteilModel */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		CEFB3D1F272349A400C02EFA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CEFB3D20272349EE00C02EFA /* Base */,
+				CE6768AF26B030AE004A5011 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CEFB3D20272349EE00C02EFA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				CE6768B126B030AE004A5011 /* LaunchScreen.storyboard */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		CEFB3D2127234B3600C02EFA /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				CEFB3D3627234EEF00C02EFA /* UseCases */,
+				CEFB3D2227234B9500C02EFA /* Interface */,
+				CEFB3D1B272348A300C02EFA /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		CEFB3D2227234B9500C02EFA /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				CEFB3D2327234BD000C02EFA /* BaseCoordinatorProtocol.swift */,
+				CEFB3D2527234C2B00C02EFA /* AssamblyProtocol.swift */,
+				CEFB3D2827234C6F00C02EFA /* RealmDataBaseProtocol.swift */,
+				CEFB3D2A27234D5000C02EFA /* RepositoryMenuProtocol.swift */,
+				CEFB3D2C27234D8600C02EFA /* RepositoryDetailsProtocol.swift */,
+				CEFB3D2E27234DBE00C02EFA /* ImageAPIServiceProtocol.swift */,
+				CEFB3D3027234DEC00C02EFA /* MovieAPIServiceProtocol.swift */,
+				CEFB3D3227234E1A00C02EFA /* LoadImageProtocol.swift */,
+				CEFB3D3427234E3F00C02EFA /* CacheImageServiceProtocol.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		CEFB3D3627234EEF00C02EFA /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				CE66630327186E33009E7A3B /* ImageAPIService.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		CEFB3D3727234F7100C02EFA /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				CE6662DA27174D88009E7A3B /* MainCoordinator.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		CEFB3D38272350CE00C02EFA /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				CE6768A826B030AD004A5011 /* SceneDelegate.swift */,
+				CE6768A626B030AD004A5011 /* AppDelegate.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -580,12 +679,15 @@
 			files = (
 				CE6E56D327146680008628D5 /* DataState.swift in Sources */,
 				CE6F2A1826B0B4C7005F4E82 /* DetailsViewController.swift in Sources */,
+				CEFB3D2B27234D5000C02EFA /* RepositoryMenuProtocol.swift in Sources */,
 				CE6768C826B03659004A5011 /* CollectionViewCell.swift in Sources */,
 				CE66630C2718750D009E7A3B /* RealmDataBase.swift in Sources */,
 				CE6663112719E714009E7A3B /* Proxy.swift in Sources */,
 				CE6662D427170402009E7A3B /* Alert.swift in Sources */,
+				CEFB3D3327234E1A00C02EFA /* LoadImageProtocol.swift in Sources */,
 				CE6E56D527146789008628D5 /* MenuViewModel.swift in Sources */,
 				CE17433026B353250039A6BC /* OverviewTableViewCell.swift in Sources */,
+				CEFB3D2427234BD000C02EFA /* BaseCoordinatorProtocol.swift in Sources */,
 				CE66630F27188D4E009E7A3B /* MenuRepository.swift in Sources */,
 				CE17432C26B352BA0039A6BC /* TitleTableViewCell.swift in Sources */,
 				CE6768CB26B03659004A5011 /* MenuViewController.swift in Sources */,
@@ -594,20 +696,26 @@
 				CE66630427186E33009E7A3B /* ImageAPIService.swift in Sources */,
 				CE6662DB27174D88009E7A3B /* MainCoordinator.swift in Sources */,
 				CE17432A26B352810039A6BC /* PosterPatchTableViewCell.swift in Sources */,
+				CEFB3D2F27234DBE00C02EFA /* ImageAPIServiceProtocol.swift in Sources */,
 				CE13A11026D031F0008C4663 /* HTTPSettigs.swift in Sources */,
 				CE6E56E02714D931008628D5 /* Typealias.swift in Sources */,
 				CE17432626B313AB0039A6BC /* MovieAPIService.swift in Sources */,
+				CEFB3D2627234C2B00C02EFA /* AssamblyProtocol.swift in Sources */,
 				CE6768CA26B03659004A5011 /* DetailsModel.swift in Sources */,
 				CE6662D827174D02009E7A3B /* AplicationCoordinator.swift in Sources */,
 				CE6662D627174CB3009E7A3B /* BaseCoordinator.swift in Sources */,
+				CEFB3D2D27234D8600C02EFA /* RepositoryDetailsProtocol.swift in Sources */,
 				CE6662CA271622FD009E7A3B /* HTTPMethod.swift in Sources */,
 				CE6662CF2716E079009E7A3B /* Assambly.swift in Sources */,
+				CEFB3D2927234C6F00C02EFA /* RealmDataBaseProtocol.swift in Sources */,
 				CE666318271C6EAF009E7A3B /* DetailsRepository.swift in Sources */,
+				CEFB3D3527234E3F00C02EFA /* CacheImageServiceProtocol.swift in Sources */,
 				CE6E56D927148796008628D5 /* MenuViewController + Extension.swift in Sources */,
 				CE6768A726B030AD004A5011 /* AppDelegate.swift in Sources */,
 				CE283E0626CAE0A400B8188B /* ReleaseTableViewCell.swift in Sources */,
 				CE6E56DB2714B762008628D5 /* ModelMovie.swift in Sources */,
 				CE6768A926B030AD004A5011 /* SceneDelegate.swift in Sources */,
+				CEFB3D3127234DEC00C02EFA /* MovieAPIServiceProtocol.swift in Sources */,
 				CE6E56D727147D47008628D5 /* CollectionViewCell + Extension.swift in Sources */,
 				CE17432426B30FE00039A6BC /* ResponsSessionError.swift in Sources */,
 			);

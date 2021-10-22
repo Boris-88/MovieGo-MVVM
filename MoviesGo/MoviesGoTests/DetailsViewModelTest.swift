@@ -1,5 +1,5 @@
 // DetailsViewModelTest.swift
-// Copyright © Boris. All rights reserved.
+// Copyright © Boris Zverik. All rights reserved.
 
 @testable import MoviesGo
 import UIKit
